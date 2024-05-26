@@ -1,0 +1,13 @@
+{
+    "name": "libraryattendance",
+    "version": "1.0.0",
+    "main": "main.js",
+    "scripts": {
+        "start": "electron ."
+    },
+    "dependencies": {
+        "electron": "^25.3.0",
+        "mysql": "^2.18.1",
+        "mysql2": "^3.9.7"
+    }
+}
