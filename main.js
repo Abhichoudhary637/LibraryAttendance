@@ -23,7 +23,7 @@ function handleDisconnect() {
     host: 'localhost',
   user: 'root',
   password: 'Abhi637@#',
-  database: 'naman',
+  database: 'library',
   port:3306
   });
 
