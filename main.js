@@ -17,6 +17,7 @@ function createWindow() {
   mainWindow.loadFile('index.html');
   mainWindow.webContents.openDevTools(); // Optional: Open the DevTools
   mainWindow.webContents.reloadIgnoringCache()
+  
 }
 
 function handleDisconnect() {

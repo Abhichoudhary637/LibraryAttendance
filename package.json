@@ -9,5 +9,9 @@
         "electron": "^25.3.0",
         "mysql": "^2.18.1",
         "mysql2": "^3.9.7"
+    },
+    "devDependencies": {
+        "electron-reload": "^2.0.0-alpha.1",
+        "electron-reloader": "^1.2.3"
     }
 }
