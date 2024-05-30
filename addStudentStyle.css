@@ -7,7 +7,7 @@ body {
 header {
     background-color: #333;
     color: #fff;
-    padding: 10px;
+    /* padding: 10px; */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -15,6 +15,10 @@ header {
     width: 100%;
     top: 0;
     z-index: 1000;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-right:20px;
+    padding-left:20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
