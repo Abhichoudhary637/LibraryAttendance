@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Student</title>
+    <link rel="stylesheet" href="addStudentStyle.css">
+</head>
+<body>
+
+<header>
+    <button class="back-button" onclick="goBack()">&#8592; Back</button>
+    <div class="user-info">
+        <img src="user-icon.png" alt="User Icon">
+        <span class="username">John Doe</span>
+    </div>
+</header>
+
+<div class="form-container">
+    <h1>Add Student</h1>
+    <form>
+        <div class="form-group">
+            <label for="studentImage">Student Image</label>
+            <input type="file" id="studentImage" name="studentImage">
+        </div>
+        <div class="form-group">
+            <label for="studentName">Student Name</label>
+            <input type="text" id="studentName" name="studentName" required>
+        </div>
+        <div class="form-group">
+            <label for="courseName">Course Name</label>
+            <input type="text" id="courseName" name="courseName" required>
+        </div>
+        <div class="form-group">
+            <label for="fromYear">From Year</label>
+            <input type="number" id="fromYear" name="fromYear" required>
+        </div>
+        <div class="form-group">
+            <label for="toYear">To Year</label>
+            <input type="number" id="toYear" name="toYear" required>
+        </div>
+        <div class="form-group">
+            <label for="expiryDate">Registration Expiry Date</label>
+            <input type="date" id="expiryDate" name="expiryDate" required>
+        </div>
+        <div class="form-group">
+            <label for="studentId">ID</label>
+            <input type="text" id="studentId" name="studentId" required>
+        </div>
+        <button type="submit">Add Student</button>
+    </form>
+</div>
+
+<script src="addStudentScript.js"></script>
+</body>
+</html>

@@ -10,6 +10,10 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
 }
 
 .user-info img {
@@ -20,26 +24,38 @@ header {
 
 #sidebar {
     width: 250px;
-    height: 100%;
+    height: calc(100% - 50px); /* Adjust this if header height changes */
     background-color: #222;
     position: fixed;
-    top: 0;
+    top: 60px; /* Same as header height */
     left: -250px;
     transition: left 0.3s ease;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+    z-index: 999; /* Ensure the sidebar is above other content */
 }
 
 #sidebar ul {
     list-style-type: none;
     padding: 0;
+    margin: 0;
 }
 
 #sidebar ul li {
-    padding: 10px;
+    border-bottom: 1px solid #444;
 }
 
 #sidebar ul li a {
+    display: block;
+    padding: 15px 20px;
     color: #fff;
     text-decoration: none;
+    font-size: 16px;
+    transition: background 0.3s, color 0.3s;
+}
+
+#sidebar ul li a:hover {
+    background-color: #575757;
+    color: #fff;
 }
 
 .burger-icon {
@@ -55,6 +71,10 @@ header {
 }
 
 .username {
-    margin-left: 10px;
+    margin-right: 10px;
 }
 
+.user-info {
+    display: flex;
+    align-items: center;
+}
