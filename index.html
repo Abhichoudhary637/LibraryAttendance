@@ -51,7 +51,7 @@
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" required>
     
-                <button type="submit">Login</button>
+                <button type="button" id="openNewPage">Login</button>
             </form>
             
         </div>
@@ -61,3 +61,10 @@
     </div>
 </body>
 </html>
+<script>
+    const { ipcRenderer } = require('electron');
+
+document.getElementById('openNewPage').addEventListener('click', () => {
+    window.location.href = 'admin.html';
+});
+</script>
