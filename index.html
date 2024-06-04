@@ -64,7 +64,29 @@
 <script>
     const { ipcRenderer } = require('electron');
 
+// document.getElementById('openNewPage').addEventListener('click', () => {
+//     window.location.href = 'admin.html';
+// });
+
+
 document.getElementById('openNewPage').addEventListener('click', () => {
-    window.location.href = 'admin.html';
+    const userid = document.getElementById('userid').value;
+    const password = document.getElementById('password').value;
+
+//   window.electron.send('save-data', { name });
+
+  ipcRenderer.send('login-controller', { userid, password });
+});
+
+ipcRenderer.on('save-data-response', (event, arg) => {
+  if (arg.error) {
+    console.error('Error:', arg.error);
+    document.getElementById('data').innerText = 'Error fetching data';
+    return;
+  }
+
+  window.location.href = 'admin.html';
+//   console.log('Results:', arg.results);
+//   document.getElementById('data').innerText = JSON.stringify(arg.results, null, 2);
 });
 </script>

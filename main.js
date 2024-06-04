@@ -17,16 +17,16 @@ function createWindow() {
   mainWindow.loadFile('index.html');
   mainWindow.webContents.openDevTools(); // Optional: Open the DevTools
   mainWindow.webContents.reloadIgnoringCache()
-  
+
 }
 
 function handleDisconnect() {
   connection = mysql.createConnection({
     host: 'localhost',
-  user: 'root',
-  password: 'shiv#2366',
-  database: 'library',
-  port:3306
+    user: 'root',
+    password: 'Abhi637@#',
+    database: 'library',
+    port: 3306
   });
 
   connection.connect((err) => {
@@ -48,6 +48,17 @@ function handleDisconnect() {
   });
 }
 
+function closeMysqlConnection() {
+  if (connection && connection.state !== 'disconnected') {
+    connection.end((err) => {
+      if (err) {
+        console.error('Error closing MySQL connection:', err);
+      } else {
+        console.log('MySQL connection closed');
+      }
+    });
+  }
+}
 app.on('ready', () => {
   createWindow();
   handleDisconnect(); // Initialize the MySQL connection
@@ -82,13 +93,40 @@ ipcMain.on('request-database', (event, arg) => {
 });
 
 app.on('before-quit', () => {
-  if (connection && connection.state !== 'disconnected') {
-    connection.end((err) => {
-      if (err) {
-        console.error('Error closing MySQL connection:', err);
-      } else {
-        console.log('MySQL connection closed');
-      }
-    });
-  }
+  closeMysqlConnection();
 });
+
+ipcMain.on('login-controller', (event, data) => {
+  handleDisconnect();
+
+  const loginquery = 'select * from app_users where userid=? and password = ?';
+  console.log(loginquery);
+  console.log(data)
+  connection.query(loginquery, [data.userid,data.password], (err, results) => {
+    if (err) {
+      console.log(err);
+
+      console.error('Error saving data to MySQL:', err);
+      event.reply('save-data-response', 'Login Failed');
+    } else {
+      if (results == undefined || results == null || results.length == 0){
+        event.reply('save-data-response', 'Login Failed');
+      } else {
+        console.log("Successfully");
+        const query = 'INSERT INTO app_login_info (userid,logindatetime,createdon,name) VALUES (?)';
+        connection.query(query, [data.userid,"","","",""], (err, results) => {
+          if (err) {
+            console.error('Error saving data to MySQL:', err);
+            event.reply('save-data-response', 'failed');
+          } else {
+            event.reply('save-data-response', 'success');
+          }
+        });
+      }
+    
+      // event.reply('save-data-response', 'success');
+    }
+  });
+
+});
+
