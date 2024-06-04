@@ -1,5 +1,7 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const mysql = require('mysql2');
+const moment = require('moment'); // Import moment
+
 
 let mainWindow;
 let connection;
@@ -100,21 +102,20 @@ ipcMain.on('login-controller', (event, data) => {
   handleDisconnect();
 
   const loginquery = 'select * from app_users where userid=? and password = ?';
-  console.log(loginquery);
-  console.log(data)
   connection.query(loginquery, [data.userid,data.password], (err, results) => {
     if (err) {
       console.log(err);
-
       console.error('Error saving data to MySQL:', err);
       event.reply('save-data-response', 'Login Failed');
     } else {
+      console.log(results)
       if (results == undefined || results == null || results.length == 0){
         event.reply('save-data-response', 'Login Failed');
       } else {
         console.log("Successfully");
-        const query = 'INSERT INTO app_login_info (userid,logindatetime,createdon,name) VALUES (?)';
-        connection.query(query, [data.userid,"","","",""], (err, results) => {
+        const query = 'INSERT INTO app_login_info (userid,logindatetime,createdon,name) VALUES (?,?,?,?)';
+        connection.query(query, [data.userid,new Date(),new Date()
+        ,results[0].name], (err, results) => {
           if (err) {
             console.error('Error saving data to MySQL:', err);
             event.reply('save-data-response', 'failed');
