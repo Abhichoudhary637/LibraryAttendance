@@ -18,8 +18,7 @@ function createWindow() {
 
   mainWindow.loadFile('index.html');
   mainWindow.webContents.openDevTools(); // Optional: Open the DevTools
-  mainWindow.webContents.reloadIgnoringCache()
-
+  mainWindow.webContents.reloadIgnoringCache();
 }
 
 function handleDisconnect() {
@@ -101,26 +100,42 @@ app.on('before-quit', () => {
 ipcMain.on('login-controller', (event, data) => {
   handleDisconnect();
 
-  const loginquery = 'select * from app_users where userid=? and password = ?';
+  let responsedata = {};
+  responsedata['code'] = '500';
+  const loginquery = 'select * from app_users where userid=? and password = ? and (status = 1 or status is null)';
   connection.query(loginquery, [data.userid,data.password], (err, results) => {
     if (err) {
       console.log(err);
+      responsedata['message'] = 'Login Failed';
+      responsedata['code'] = '500';
+      responsedata['error'] = err;
       console.error('Error saving data to MySQL:', err);
-      event.reply('save-data-response', 'Login Failed');
+      event.reply('save-data-response', responsedata);
     } else {
-      console.log(results)
+      // console.log(results)
       if (results == undefined || results == null || results.length == 0){
-        event.reply('save-data-response', 'Login Failed');
+        responsedata['message'] = 'Userid is not existing';
+        event.reply('save-data-response', responsedata);
       } else {
-        console.log("Successfully");
+        let isadmin = false;
+        if (results.usertype == 1){
+          isadmin = false;
+        } else {
+          isadmin = false;
+        }
+        // console.log("Successfully");
         const query = 'INSERT INTO app_login_info (userid,logindatetime,createdon,name) VALUES (?,?,?,?)';
         connection.query(query, [data.userid,new Date(),new Date()
         ,results[0].name], (err, results) => {
           if (err) {
+            responsedata['error'] = err;
             console.error('Error saving data to MySQL:', err);
-            event.reply('save-data-response', 'failed');
+            event.reply('save-data-response', responsedata);
           } else {
-            event.reply('save-data-response', 'success');
+            responsedata['code'] = '200';
+            responsedata['message'] = 'Successfully Login';
+            responsedata['isadmin'] = isadmin;
+            event.reply('save-data-response', responsedata);
           }
         });
       }

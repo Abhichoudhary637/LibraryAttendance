@@ -79,12 +79,14 @@ document.getElementById('openNewPage').addEventListener('click', () => {
 });
 
 ipcRenderer.on('save-data-response', (event, arg) => {
-  if (arg.error) {
+  if (arg.code != 200) {
     console.error('Error:', arg.error);
+    alert(arg.message);
     document.getElementById('data').innerText = 'Error fetching data';
     return;
   }
 
+  alert(arg.message);
   window.location.href = 'admin.html';
 //   console.log('Results:', arg.results);
 //   document.getElementById('data').innerText = JSON.stringify(arg.results, null, 2);
