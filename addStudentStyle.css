@@ -17,8 +17,8 @@ header {
     z-index: 1000;
     padding-top: 20px;
     padding-bottom: 20px;
-    padding-right:20px;
-    padding-left:20px;
+    padding-right: 20px;
+    padding-left: 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
@@ -47,10 +47,12 @@ header {
 }
 
 .form-container {
-    margin-top: 70px; /* Adjust to match the height of the header */
+    margin-top: 70px;
+    /* Adjust to match the height of the header */
     padding: 20px;
     max-width: 500px;
-    margin: 70px auto 0; /* Center the form and add space for the header */
+    margin: 70px auto 0;
+    /* Center the form and add space for the header */
     background: #fff;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
@@ -89,3 +91,4 @@ button[type="submit"] {
 button[type="submit"]:hover {
     background-color: #555;
 }
+
