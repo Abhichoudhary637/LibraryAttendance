@@ -1,0 +1,66 @@
+* {
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+.bg_wrp {
+    background: url('../Assets/image/register-left.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    position: relative;
+}
+
+.bg_wrp_login {
+    background: url('../Assets/image/login-right.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    position: relative;
+}
+
+.clg_logo,
+.clg_logo_login {
+    background: url('../Assets/image/logo-login.svg');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 50px;
+}
+
+.clg_logo {
+    left: 0;
+}
+
+.clg_logo_login {
+    right: 0;
+}
+
+.clg_logo_login img {
+    width: 250px;
+}
+
+.reg_form label {
+    font-size: 14px;
+}
+
+.registration_form {
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.login_form {
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background: url('../Assets/image/login-left.png');
+    background-size: cover;
+}

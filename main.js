@@ -3,6 +3,7 @@ const mysql = require('mysql2');
 const moment = require('moment'); // Import moment
 
 
+
 let mainWindow;
 let connection;
 
@@ -16,7 +17,7 @@ function createWindow() {
     },
   });
 
-  mainWindow.loadFile('index.html');
+  mainWindow.loadFile('src/Login.html');
   mainWindow.webContents.openDevTools(); // Optional: Open the DevTools
   mainWindow.webContents.reloadIgnoringCache();
 }
@@ -25,7 +26,8 @@ function handleDisconnect() {
   connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'Abhi637@#',
+    // password: 'Abhi637@#',
+    password:"shiv#2366",
     database: 'library',
     port: 3306
   });

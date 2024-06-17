@@ -1,0 +1,28 @@
+@media (max-width:910px) {
+    .registration_wrp .login_form {
+        width: 75% !important;
+    }
+
+    .bg_wrp_login {
+        width: 100%;
+    }
+
+    .login_form .w-75 {
+        width: 90% !important;
+    }
+}
+
+@media (max-width:590px) {
+    .bg_wrp_login {
+        background-position: right;
+    }
+
+    .login_form {
+        transform: translate(-50%, -50%) !important;
+        left: 50%;
+    }
+
+    .login_form .w-75 {
+        width: 100% !important;
+    }
+}
