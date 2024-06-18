@@ -22,6 +22,10 @@ header {
     border-radius: 50%;
 }
 
+.decoration_none {
+    text-decoration: none;
+}
+
 #sidebar {
     width: 250px;
     height: calc(100% - 50px);
@@ -35,6 +39,10 @@ header {
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
     z-index: 999;
     /* Ensure the sidebar is above other content */
+}
+
+.text-left {
+    text-align: left;
 }
 
 #sidebar ul {
@@ -130,7 +138,23 @@ header {
 .scan_img {
     border: 2px dotted black;
     background: #F9F9F9;
-    border-radius: 7px;
+    border-radius: 16px;
+}
+
+.text-right{
+    text-align: right;
+}
+
+.text_mid{
+    font-size: 14px;
+}
+
+.student_img {
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%);
+    border: 4px white solid;
+    border-radius: 50%;
 }
 
 .w-65 {
@@ -172,7 +196,8 @@ header {
 }
 
 .search-button {
-    background-color: #222;;
+    background-color: #222;
+    ;
     color: white;
     border: none;
     padding: 2px 4px;
@@ -184,32 +209,39 @@ header {
 }
 
 .search-button:hover {
-    background-color: #2223;;
+    background-color: #2223;
+    ;
 }
+
 .add-button {
     width: 87px;
     height: 40px;
-    background-color: #222;;
+    background-color: #222;
+    ;
     color: white;
-    border-radius:10px;
-    /* padding: 10px; */
-}
-.import-button {
-    width: 87px;
-    height: 40px;
-    background-color:#E9E9EB;;
-    color:#2C2E3A;
     border-radius: 10px;
     /* padding: 10px; */
 }
-.button-container{
-    flex-direction:row,
-    
+
+.import-button {
+    width: 87px;
+    height: 40px;
+    background-color: #E9E9EB;
+    ;
+    color: #2C2E3A;
+    border-radius: 10px;
+    /* padding: 10px; */
 }
-.search-container{
+
+.button-container {
+    flex-direction: row,
+
+}
+
+.search-container {
     flex-direction: row;
-    width:1000px;
-    display:flex
+    width: 1000px;
+    display: flex
 }
 
 /* body {
@@ -236,7 +268,8 @@ table {
     border-collapse: collapse;
 }
 
-th, td {
+th,
+td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
@@ -248,15 +281,17 @@ th {
 }
 
 tr:nth-child(even) {
-    background-color:  #2223;;
+    background-color: #2223;
+    ;
 }
 
 tr:hover {
     background-color: #ddd;
 }
 
-.edit-button, .delete-button {
-    background-color:  #2223;
+.edit-button,
+.delete-button {
+    background-color: #2223;
     color: white;
     border: none;
     padding: 5px 10px;
@@ -268,7 +303,7 @@ tr:hover {
 }
 
 .edit-button:hover {
-    background-color:  #2223;
+    background-color: #2223;
 }
 
 .delete-button {
