@@ -57,31 +57,31 @@
 <script>
     const { ipcRenderer } = require('electron');
 
+document.getElementById('openNewPage').addEventListener('click', () => {
+ window.location.href = 'adminDashboard.html';
+});
+
+
 // document.getElementById('openNewPage').addEventListener('click', () => {
-//     window.location.href = 'admin.html';
+//     const userid = document.getElementById('userid').value;
+//     const password = document.getElementById('password').value;
+
+// //   window.electron.send('save-data', { name });
+
+//   ipcRenderer.send('login-controller', { userid, password });
 // });
 
+// ipcRenderer.on('save-data-response', (event, arg) => {
+//   if (arg.code != 200) {
+//     console.error('Error:', arg.error);
+//     alert(arg.message);
+//     document.getElementById('data').innerText = 'Error fetching data';
+//     return;
+//   }
 
-document.getElementById('openNewPage').addEventListener('click', () => {
-    const userid = document.getElementById('userid').value;
-    const password = document.getElementById('password').value;
-
-//   window.electron.send('save-data', { name });
-
-  ipcRenderer.send('login-controller', { userid, password });
-});
-
-ipcRenderer.on('save-data-response', (event, arg) => {
-  if (arg.code != 200) {
-    console.error('Error:', arg.error);
-    alert(arg.message);
-    document.getElementById('data').innerText = 'Error fetching data';
-    return;
-  }
-
-  alert(arg.message);
-  window.location.href = 'adminDashboard.html';
-//   console.log('Results:', arg.results);
-//   document.getElementById('data').innerText = JSON.stringify(arg.results, null, 2);
-});
+//   alert(arg.message);
+//   window.location.href = 'adminDashboard.html';
+// //   console.log('Results:', arg.results);
+// //   document.getElementById('data').innerText = JSON.stringify(arg.results, null, 2);
+// });
 </script>
