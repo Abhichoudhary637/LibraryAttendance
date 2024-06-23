@@ -141,11 +141,11 @@ header {
     border-radius: 16px;
 }
 
-.text-right{
+.text-right {
     text-align: right;
 }
 
-.text_mid{
+.text_mid {
     font-size: 14px;
 }
 
@@ -255,11 +255,11 @@ header {
 } */
 
 .table-container {
-    background-color: white;
+    /* background-color: white;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 90%;
+    max-width: 90%; */
     overflow-x: auto;
 }
 
@@ -277,7 +277,7 @@ td {
 
 th {
     background-color: #2223;
-    color: white;
+    /* color: white; */
 }
 
 tr:nth-child(even) {
