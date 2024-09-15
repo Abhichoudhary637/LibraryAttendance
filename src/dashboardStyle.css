@@ -313,3 +313,32 @@ tr:hover {
 .delete-button:hover {
     background-color: #c82333;
 }
+.add_button{
+    top: 182px;
+    left: 1300px;
+    height: 20px;
+    /* UI Properties */
+   background: transparent url('img/baseline-add_circle_outline-24px.png') 0% 0% no-repeat padding-box;
+    opacity: 1;} 
+
+    .edit-button:hover{
+     box-shadow: 0px 0px 10px black;
+    }
+    .delete-button:hover{
+        box-shadow: 0px 0px 10px black;
+       }
+       
+       .add-button:hover{
+        box-shadow: 0px 0px 4px black;
+       }
+
+       .import-button:hover{
+        box-shadow: 0px 0px 4px black;
+        background-color: black;
+        color:white;
+       }
+
+       .table-container p-0{
+        display: flex;
+        justify-content: center;
+       }

@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="dashboardStyle.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </head>
@@ -208,6 +209,7 @@
                 <div class="row mx-0 py-3 px-1">
                     <div class="col-sm-6">
                         <div class="search-container">
+                            <i class="fa-solid fa-magnifying-glass"></i>
 
                             <div class="button-container">
 
@@ -222,9 +224,27 @@
                         <div class="button-container">
 
                             <button class="add-button" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">Add</button>
+                                data-bs-target="#exampleModal"> 
+                                <svg id="baseline-add_circle_outline-24px" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+                                    <path id="Path_918" data-name="Path 918" d="M0,0H20V20H0Z" fill="none"/>
+                                    <path id="Path_919" data-name="Path 919" d="M11.167,6.167H9.5V9.5H6.167v1.667H9.5V14.5h1.667V11.167H14.5V9.5H11.167ZM10.333,2a8.333,8.333,0,1,0,8.333,8.333A8.336,8.336,0,0,0,10.333,2Zm0,15A6.667,6.667,0,1,1,17,10.333,6.676,6.676,0,0,1,10.333,17Z" transform="translate(-0.333 -0.333)" fill="#fff"/>
+                                  </svg>Add</button>
 
-                            <button class="import-button">import</button>
+                            <button class="import-button">
+                                <i class="fa-solid fa-upload"></i>
+                                import</button>
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="23.281" height="23.281" viewBox="0 0 23.281 23.281">
+                                    <g id="baseline-keyboard_arrow_right-24px" transform="translate(-0.001)">
+                                      <path id="Path_1415" data-name="Path 1415" d="M15.778,16.273,11.335,11.82l4.443-4.453L14.41,6,8.59,11.82l5.82,5.82Z" transform="translate(-0.829 -0.18)" fill="#262338"/>
+                                      <path id="Path_1416" data-name="Path 1416" d="M23.281,0H0V23.281H23.281Z" transform="translate(0.001)" fill="none"/>
+                                    </g>
+                                  </svg>
+                                  
+                                <svg id="baseline-keyboard_arrow_right-24px" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                    <path id="Path_1415" data-name="Path 1415" d="M8.59,16.59,13.17,12,8.59,7.41,10,6l6,6-6,6Z" transform="translate(0 0)" fill="#2c2e3a"/>
+                                    <path id="Path_1416" data-name="Path 1416" d="M0,0H24V24H0Z" fill="none"/>
+                                  </svg>
 
 
                         </div>
@@ -238,7 +258,7 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>SNO</th>
+                               
                                 <th>Name</th>
                                 <th>Designation</th>
                                 <th>Department</th>
@@ -250,30 +270,74 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>1</td>
-                                <td>John Doe</td>
-                                <td>Manager</td>
-                                <td>Sales</td>
-                                <td>123-456-7890</td>
-                                <td>john.doe@example.com</td>
-                                <td>2024-01-15</td>
+                                
+                                <td><img src="Assets/ss.png"> Kiran Kumar | AD7784</td>
+                                <td>Graphics Designer</td>
+                                <td>Designer</td>
+                                <td>9846444532</td>
+                                <td>shubh_kumar@gmail.com</td>
+                                <td>02-06-2024 | 13:00 pm</td>
                                 <td>
-                                    <button class="edit-button">Edit</button>
-                                    <button class="delete-button">Delete</button>
+                                    <button class="edit-button"><i class="fa-regular fa-pen-to-square"></i></button>
+                                    <button class="delete-button"><i class="fa-solid fa-trash-can"></i></button>
                                 </td>
                             </tr>
                             <tr>
-                                <td>2</td>
-                                <td>Jane Smith</td>
-                                <td>Developer</td>
-                                <td>IT</td>
-                                <td>098-765-4321</td>
-                                <td>jane.smith@example.com</td>
-                                <td>2024-02-20</td>
+                                
+                                <td><img src="Assets/sss.png"> Samar | DPS776</td>
+                                <td>Frontend Developer</td>
+                                <td>Development</td>
+                               
+                                <td>9866656723</td>
+                                <td>sumant98@gmail.com</td>
+                                <td>02-06-2024 | 13:00 pm</td>
                                 <td>
-                                    <button class="edit-button">Edit</button>
-                                    <button class="delete-button">Delete</button>
+                                    <button class="edit-button"><i class="fa-regular fa-pen-to-square"></i></button>
+                                    <button class="delete-button"><i class="fa-solid fa-trash-can"></i></button>
                                 </td>
+                            </tr>
+                            <tr>
+
+                                <td><img src="Assets/ssss.png"> Rajkumar Singh | GD3899</td>
+                                <td>PGT English</td>
+                                <td>Teaching</td>
+                                <td>8976589233</td>
+                                <td>rambhajan_singh92@gmail.com</td>
+                                <td>02-06-2024 | 13:00 pm</td>
+                                <td>
+                               
+                                        <button class="edit-button"><i class="fa-regular fa-pen-to-square"></i></button>
+                                        <button class="delete-button"><i class="fa-solid fa-trash-can"></i></button>
+                                    </td>
+                            </tr>
+                            <tr>
+                                <td><img src="Assets/ss.png"> Priya Sharmma | KT78934</td>
+                               <td>TGT Maths</td>
+                               <td>Teaching</td>
+                                 <td>6783843489</td>
+                                 <td>rajesh@gmail.com</td>
+                                <td>02-06-2024 | 13:00 pm</td>
+                                 <td>
+                                   
+                                  <button class="edit-button"><i class="fa-regular fa-pen-to-square"></i></button>
+                                   <button class="delete-button"><i class="fa-solid fa-trash-can"></i></button>
+                                 </td>
+                                 </tr>
+                                 <tr>
+                                    <td><img src="Assets/sss.png">
+                                        Saurabh Dubey | 688323</td>
+                                      <td>Sports</td>
+                                        <td>Teaching</td>
+                                      <td>8968399234</td>
+                                      <td>siddhart_dubey98@gmail.com</td>
+                                      <td>02-06-2024 | 13:00 pm</td>
+                                      <td>
+                                     
+                                              <button class="edit-button"><i class="fa-regular fa-pen-to-square"></i></button>
+                                              <button class="delete-button"><i class="fa-solid fa-trash-can"></i></button>
+                                          </td>
+                                          </tr>
+                                 </tr>
                             </tr>
                             <!-- Add more rows as needed -->
                         </tbody>
