@@ -26,8 +26,8 @@ function handleDisconnect() {
   connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    // password: 'Abhi637@#',
-    password:"shiv#2366",
+    password: 'Abhi637@#',
+    // password:"shiv#2366",
     database: 'library',
     port: 3306
   });
@@ -121,9 +121,7 @@ ipcMain.on('login-controller', (event, data) => {
       } else {
         let isadmin = false;
         if (results.usertype == 1){
-          isadmin = false;
-        } else {
-          isadmin = false;
+          isadmin = true;
         }
         // console.log("Successfully");
         const query = 'INSERT INTO app_login_info (userid,logindatetime,createdon,name) VALUES (?,?,?,?)';
@@ -142,9 +140,38 @@ ipcMain.on('login-controller', (event, data) => {
         });
       }
     
+      closeMysqlConnection();
       // event.reply('save-data-response', 'success');
     }
   });
 
+});
+
+ipcMain.on('getStudents', (event, data) => {
+  handleDisconnect();
+
+  let responsedata = {};
+  responsedata['code'] = '500';
+  const studentquery = 'select * from students';
+  if (data.fts != undefined && data.fts != null && data.fts != ""){
+    studentquery += " where name like %"+data.fts+"%";
+  }
+  connection.query(studentquery, (err, results) => {
+    if (err) {
+      console.log(err);
+      responsedata['message'] = 'Error in getting data';
+      responsedata['code'] = '500';
+      responsedata['error'] = err;
+      console.error('Error saving data to MySQL:', err);
+      event.reply('getStudentRes', responsedata);
+    } else {
+      responsedata['code'] = '200';
+      responsedata['message'] = 'Successful';
+      responsedata['data'] = results;
+      event.reply('getStudentRes', responsedata);
+    }
+  });
+
+  closeMysqlConnection();
 });
 
