@@ -175,3 +175,31 @@ ipcMain.on('getStudents', (event, data) => {
   closeMysqlConnection();
 });
 
+ipcMain.on('getEmployee', (event, data) => {
+  handleDisconnect();
+
+  let responsedata = {};
+  responsedata['code'] = '500';
+  const employeequery = 'select * from employee';
+  if (data.fts != undefined && data.fts != null && data.fts != ""){
+    employeequery += " where name like %"+data.fts+"%";
+  }
+  connection.query(employeequery, (err, results) => {
+    if (err) {
+      console.log(err);
+      responsedata['message'] = 'Error in getting data';
+      responsedata['code'] = '500';
+      responsedata['error'] = err;
+      console.error('Error saving data to MySQL:', err);
+      event.reply('getEmployeeRes', responsedata);
+    } else {
+      responsedata['code'] = '200';
+      responsedata['message'] = 'Successful';
+      responsedata['data'] = results;
+      event.reply('getEmployeeRes', responsedata);
+    }
+  });
+
+  closeMysqlConnection();
+});
+

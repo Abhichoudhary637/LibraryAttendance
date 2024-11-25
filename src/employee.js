@@ -16,11 +16,8 @@ ipcRenderer.on('getEmployeeRes', (event, arg) => {
         let employeedata = "";
         employeedata += '<tr>';
         employeedata += ' <td><img src="Assets/ss.png"> '+obj?.name+' | '+obj?.employee_id+'</td>';
-        employeedata += '<td>'+obj?.course+'</td>';
-        employeedata += '<td>'+obj?.branch+'</td>';
-        employeedata += '<td>'+obj?.session+'</td>';
-        employeedata += '<td>'+obj?.father+'</td>';
-        employeedata += ' <td>'+obj?.mother+'</td>';
+        employeedata += '<td>'+obj?.department+'</td>';
+        employeedata += '<td>'+obj?.designation+'</td>';
         employeedata += ' <td>'+obj?.mobileno+'</td>';
         employeedata += ' <td>'+obj?.emailid+'</td>';
         employeedata += ' <td>'+obj?.regdate+'</td>';
