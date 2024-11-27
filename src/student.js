@@ -32,3 +32,7 @@ ipcRenderer.on('getStudentRes', (event, arg) => {
         document.getElementById('studentdata').innerHTML += studentsdata;
     });
 });
+
+function saveStudentData() {
+    
+}

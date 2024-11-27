@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="dashboardStyle.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 
 </head>
 
@@ -99,7 +101,7 @@
                                     <div id="scanner"></div>
                                     <img src="./Assets/image/scan-icon.svg" />
                                 </div>
-                                <button class="btn btn-dark" id="startScanner">
+                                <button onclick="scanNowFunction()" class="btn btn-dark" id="startScanner">
                                     <div class="text_small">SCAN NOW</div>
                                 </button>
                                 <p class="text_small mt-3 mb-0">Having trouble in scanning the code ? </p>
@@ -209,7 +211,7 @@
                                 </div>
                                 <div class="col-3 p-1">
                                     <div class="count_icon">
-                                        <img src="./Assets/image/student.png" class="img-fluid rounded-start" alt="...">
+                                        <img id="imageDisplay" src="./Assets/image/student.png" class="img-fluid rounded-start" alt="...">
                                     </div>
                                 </div>
                             </div>
