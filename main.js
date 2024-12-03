@@ -152,10 +152,12 @@ ipcMain.on('getStudents', (event, data) => {
 
   let responsedata = {};
   responsedata['code'] = '500';
-  const studentquery = 'select * from students';
+  let studentquery = 'select * from students';
   if (data.fts != undefined && data.fts != null && data.fts != ""){
     studentquery += " where name like %"+data.fts+"%";
   }
+
+  studentquery += " order by id desc";
   connection.query(studentquery, (err, results) => {
     if (err) {
       console.log(err);
@@ -171,6 +173,38 @@ ipcMain.on('getStudents', (event, data) => {
       event.reply('getStudentRes', responsedata);
     }
   });
+
+  closeMysqlConnection();
+});
+
+ipcMain.on('saveStudentData', (event, studentData) => {
+  handleDisconnect();
+
+  const data = JSON.parse(studentData);
+  console.log("comes here");
+  console.log(data);
+  let responsedata = {};
+  responsedata['code'] = '500';
+  const query = 'INSERT INTO students (student_id,name,course,branch,session,regdate, regexpdate, father, mother, emailid, mobileno, address) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)';
+        connection.query(query, [data.studentid,data.studentname,data.course, data.branch, data.session, data.registrationdate, data.expirationdate, data.fathername, data.mothername, data.emailid, data.mobileno, data.address
+        ], (err, results) => {
+          if (err) {
+            console.log(err);
+            responsedata['message'] = 'Unable to Save';
+            responsedata['code'] = '500';
+            responsedata['error'] = err;
+            console.error('Error saving data to MySQL:', err);
+            event.reply('getStudentResOnSave', responsedata);
+          } else {
+            console.log("test200")
+            responsedata['code'] = '200';
+            responsedata['message'] = 'Successful';
+            responsedata['data'] = [];
+            event.reply('getStudentResOnSave', responsedata);
+          }
+        });
+
+        console.log("test")
 
   closeMysqlConnection();
 });
