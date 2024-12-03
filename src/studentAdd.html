@@ -207,9 +207,15 @@
                                 </svg>Add</button>
 
 
-                            <button class="import-button">
-                                <i class="fa-solid fa-upload"></i>
-                                import</button>
+                            
+                          <input type="file" id="fileInput" style="display: none;" onchange="handleFileUpload(event)" />      
+                          <button 
+                          class="import-button" 
+                          onclick="triggerFileUpload()"
+                          >
+                              <i class="fa-solid fa-upload"></i>
+                              import
+                          </button>
 
                             <!-- <p id="para">1-10 of 120</p> -->
                             <!-- <i class="fa-solid fa-less-than"></i> -->
@@ -271,6 +277,25 @@
 <script src="../script.js"></script>
 <script src="footer.js"></script>
 <script src="student.js"></script>
+
+<script>
+    // Function to trigger file input click
+    function triggerFileUpload() {
+      document.getElementById('fileInput').click();
+    }
+    // Function to handle file upload
+    function handleFileUpload(event) {
+      const file = event.target.files[0];
+      if (file) {
+        console.log(`File selected: ${file.name}`);
+        // Perform your file handling logic here
+      } else {
+        console.log("No file selected.");
+      }
+    }
+  </script>
+
+
 </body>
 
 </html>

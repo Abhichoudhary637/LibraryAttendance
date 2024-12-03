@@ -186,9 +186,17 @@
                                     <path id="Path_919" data-name="Path 919" d="M11.167,6.167H9.5V9.5H6.167v1.667H9.5V14.5h1.667V11.167H14.5V9.5H11.167ZM10.333,2a8.333,8.333,0,1,0,8.333,8.333A8.336,8.336,0,0,0,10.333,2Zm0,15A6.667,6.667,0,1,1,17,10.333,6.676,6.676,0,0,1,10.333,17Z" transform="translate(-0.333 -0.333)" fill="#fff"/>
                                   </svg>Add</button>
 
-                            <button class="import-button">
+
+                          <input type="file" id="fileInput" style="display: none;" onchange="handleFileUpload(event)" />      
+                            <button 
+                            class="import-button" 
+                            onclick="triggerFileUpload()"
+                            >
                                 <i class="fa-solid fa-upload"></i>
-                                import</button>
+                                import
+                            </button>
+
+                          
 
                                 <svg xmlns="http://www.w3.org/2000/svg" width="23.281" height="23.281" viewBox="0 0 23.281 23.281">
                                     <g id="baseline-keyboard_arrow_right-24px" transform="translate(-0.001)">
@@ -240,6 +248,25 @@
 <script src="../script.js"></script>
 <script src="footer.js"></script>
 <script src="employee.js"></script>
+
+<script>
+    // Function to trigger file input click
+    function triggerFileUpload() {
+      document.getElementById('fileInput').click();
+    }
+    // Function to handle file upload
+    function handleFileUpload(event) {
+      const file = event.target.files[0];
+      if (file) {
+        console.log(`File selected: ${file.name}`);
+        // Perform your file handling logic here
+      } else {
+        console.log("No file selected.");
+      }
+    }
+  </script>
+
+
 </body>
 
 </html>
