@@ -181,8 +181,6 @@ ipcMain.on('saveStudentData', (event, studentData) => {
   handleDisconnect();
 
   const data = JSON.parse(studentData);
-  console.log("comes here");
-  console.log(data);
   let responsedata = {};
   responsedata['code'] = '500';
   const query = 'INSERT INTO students (student_id,name,course,branch,session,regdate, regexpdate, father, mother, emailid, mobileno, address) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)';
@@ -204,8 +202,6 @@ ipcMain.on('saveStudentData', (event, studentData) => {
           }
         });
 
-        console.log("test")
-
   closeMysqlConnection();
 });
 
@@ -214,10 +210,12 @@ ipcMain.on('getEmployee', (event, data) => {
 
   let responsedata = {};
   responsedata['code'] = '500';
-  const employeequery = 'select * from employee';
+  let employeequery = 'select * from employee';
   if (data.fts != undefined && data.fts != null && data.fts != ""){
     employeequery += " where name like %"+data.fts+"%";
   }
+
+  employeequery += ' order by id desc';
   connection.query(employeequery, (err, results) => {
     if (err) {
       console.log(err);
@@ -233,6 +231,35 @@ ipcMain.on('getEmployee', (event, data) => {
       event.reply('getEmployeeRes', responsedata);
     }
   });
+
+  closeMysqlConnection();
+});
+
+
+ipcMain.on('saveEmployeeData', (event, studentData) => {
+  handleDisconnect();
+
+  const data = JSON.parse(studentData);
+  let responsedata = {};
+  responsedata['code'] = '500';
+  const query = 'INSERT INTO employee (employee_id,name,department,designation,regdate,regexpdate, emailid, mobileno, address) VALUES (?,?,?,?,?,?,?,?,?)';
+        connection.query(query, [data.employeeid,data.employeename,data.department, data.designation, data.registrationdate, data.expirationdate,data.emailid, data.mobileno, data.address
+        ], (err, results) => {
+          if (err) {
+            console.log(err);
+            responsedata['message'] = 'Unable to Save';
+            responsedata['code'] = '500';
+            responsedata['error'] = err;
+            console.error('Error saving data to MySQL:', err);
+            event.reply('getEmployeeResOnSave', responsedata);
+          } else {
+            console.log("test200")
+            responsedata['code'] = '200';
+            responsedata['message'] = 'Successful';
+            responsedata['data'] = [];
+            event.reply('getEmployeeResOnSave', responsedata);
+          }
+        });
 
   closeMysqlConnection();
 });

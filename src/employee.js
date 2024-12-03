@@ -1,8 +1,12 @@
 const { ipcRenderer } = require('electron');
 document.addEventListener('DOMContentLoaded', () => {
+    getEmployees();
+});
+
+function getEmployees(){
     const fts = document.getElementById('fts').value;
     ipcRenderer.send('getEmployee', { fts });
-});
+}
 
 ipcRenderer.on('getEmployeeRes', (event, arg) => {
     if (arg.code != 200) {
@@ -12,6 +16,7 @@ ipcRenderer.on('getEmployeeRes', (event, arg) => {
     }
 
     console.log(arg.data);
+    document.getElementById('employeedata').innerHTML = "";
     arg?.data.forEach(obj => {
         let employeedata = "";
         employeedata += '<tr>';
@@ -28,4 +33,22 @@ ipcRenderer.on('getEmployeeRes', (event, arg) => {
         employeedata += ' </tr>';
         document.getElementById('employeedata').innerHTML += employeedata;
     });
+});
+
+function saveEmployeeData() {
+    let data = Object.fromEntries(new FormData(document.getElementById('employeeForm')).entries());
+    ipcRenderer.send('saveEmployeeData', JSON.stringify(data));
+}
+
+ipcRenderer.on('getEmployeeResOnSave', (event, arg) => {
+    if (arg.code != 200) {
+        console.error('Error:', arg.error);
+        alert(arg.message);
+        return;
+    }
+
+    const modalElement = document.getElementById("exampleModal");
+    const modalInstance = bootstrap.Modal.getInstance(modalElement) || new bootstrap.Modal(modalElement);
+    modalInstance.hide(); 
+    getEmployees();
 });
