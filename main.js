@@ -182,9 +182,11 @@ ipcMain.on('saveStudentData', (event, studentData) => {
 
   const data = JSON.parse(studentData);
   let responsedata = {};
+  const imageData = data?.imageData ? Buffer.from(data?.imageData.replace(/^data:image\/\w+;base64,/, ''), 'base64') : null;
+
   responsedata['code'] = '500';
-  const query = 'INSERT INTO students (student_id,name,course,branch,session,regdate, regexpdate, father, mother, emailid, mobileno, address) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)';
-        connection.query(query, [data.studentid,data.studentname,data.course, data.branch, data.session, data.registrationdate, data.expirationdate, data.fathername, data.mothername, data.emailid, data.mobileno, data.address
+  const query = 'INSERT INTO students (student_id,name,course,branch,session,regdate, regexpdate, father, mother, emailid, mobileno, address, imagepath) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)';
+        connection.query(query, [data.studentid,data.studentname,data.course, data.branch, data.session, data.registrationdate, data.expirationdate, data.fathername, data.mothername, data.emailid, data.mobileno, data.address,imageData
         ], (err, results) => {
           if (err) {
             console.log(err);
@@ -240,10 +242,11 @@ ipcMain.on('saveEmployeeData', (event, studentData) => {
   handleDisconnect();
 
   const data = JSON.parse(studentData);
+  const imageData = data?.imageData ? Buffer.from(data?.imageData.replace(/^data:image\/\w+;base64,/, ''), 'base64') : null;
   let responsedata = {};
   responsedata['code'] = '500';
-  const query = 'INSERT INTO employee (employee_id,name,department,designation,regdate,regexpdate, emailid, mobileno, address) VALUES (?,?,?,?,?,?,?,?,?)';
-        connection.query(query, [data.employeeid,data.employeename,data.department, data.designation, data.registrationdate, data.expirationdate,data.emailid, data.mobileno, data.address
+  const query = 'INSERT INTO employee (employee_id,name,department,designation,regdate,regexpdate, emailid, mobileno, address,imagepath) VALUES (?,?,?,?,?,?,?,?,?,?)';
+        connection.query(query, [data.employeeid,data.employeename,data.department, data.designation, data.registrationdate, data.expirationdate,data.emailid, data.mobileno, data.address,imageData
         ], (err, results) => {
           if (err) {
             console.log(err);

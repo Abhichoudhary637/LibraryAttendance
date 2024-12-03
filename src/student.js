@@ -19,8 +19,12 @@ ipcRenderer.on('getStudentRes', (event, arg) => {
     document.getElementById('studentdata').innerHTML = "";
     arg?.data.forEach(obj => {
         let studentsdata = "";
+        let imageData = "Assets/ss.png"
+        if (obj?.imagepath){
+            imageData = `data:image;base64,${Buffer.from(obj.imagepath).toString('base64')}`;
+        }
         studentsdata += '<tr>';
-        studentsdata += ' <td><img src="Assets/ss.png"> '+obj?.name+' | '+obj?.student_id+'</td>';
+        studentsdata += ' <td><img src="'+imageData+'"> '+obj?.name+' | '+obj?.student_id+'</td>';
         studentsdata += '<td>'+obj?.course+'</td>';
         studentsdata += '<td>'+obj?.branch+'</td>';
         studentsdata += '<td>'+obj?.session+'</td>';
@@ -40,7 +44,23 @@ ipcRenderer.on('getStudentRes', (event, arg) => {
 
 function saveStudentData() {
     let data = Object.fromEntries(new FormData(document.getElementById('studentForm')).entries());
+    const fileInput = document.getElementById('student_image');
+    // If a file is selected, read the file and add image data to the object
+  if (fileInput.files.length > 0) {
+    const file = fileInput.files[0];
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      const imageData = reader.result; // Base64 encoded string of the image
+      data.imageData = imageData;     // Include image data if file is selected
+
+      // Send data to main process
+      ipcRenderer.send('saveStudentData', JSON.stringify(data));
+    };
+    reader.readAsDataURL(file); // Read the file as Base64
+  }else {
     ipcRenderer.send('saveStudentData', JSON.stringify(data));
+  }
 }
 
 ipcRenderer.on('getStudentResOnSave', (event, arg) => {
