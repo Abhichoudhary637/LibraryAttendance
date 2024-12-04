@@ -101,7 +101,7 @@
                                     <div id="scanner"></div>
                                     <img src="./Assets/image/scan-icon.svg" />
                                 </div>
-                                <button onclick="scanNowFunction()" class="btn btn-dark" id="startScanner">
+                                <button class="btn btn-dark" id="startScanner">
                                     <div class="text_small">SCAN NOW</div>
                                 </button>
                                 <p class="text_small mt-3 mb-0">Having trouble in scanning the code ? </p>
@@ -150,8 +150,44 @@
                             <div class="row g-0 align-items-center justify-content-between">
                                 <div class="col-9">
                                     <div class="card-body text-right p-3">
-                                        <h5 class="text_small text-secondary mb-0">Total Visitors</h5>
-                                        <div class="project_status_count fw-bold">250</div>
+                                        <h5 class="text_small text-secondary mb-0">Student Visitors</h5>
+                                        <div class="project_status_count fw-bold" id="studentVisitorCount">0</div>
+                                        <h5 class="text_small text-secondary mb-0">See details</h5>
+                                    </div>
+                                </div>
+                                <div class="col-3 p-1">
+                                    <div class="count_icon">
+                                        <img src="./Assets/image/student.png" class="img-fluid rounded-start" alt="...">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card mb-3">
+                            <div class="row g-0 align-items-center justify-content-between">
+                                <div class="col-9">
+                                    <div class="card-body text-right p-3">
+                                        <h5 class="text_small text-secondary mb-0">Employee Visitors</h5>
+                                        <div class="project_status_count fw-bold" id="empVisitorCount">0</div>
+                                        <h5 class="text_small text-secondary mb-0">See details</h5>
+                                    </div>
+                                </div>
+                                <div class="col-3 p-1">
+                                    <div class="count_icon">
+                                        <img src="./Assets/image/student.png" class="img-fluid rounded-start" alt="...">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card mb-3">
+                            <div class="row g-0 align-items-center justify-content-between">
+                                <div class="col-9">
+                                    <div class="card-body text-right p-3">
+                                        <h5 class="text_small text-secondary mb-0">Other Visitors</h5>
+                                        <div class="project_status_count fw-bold" id="otherVisitCount">0</div>
                                         <h5 class="text_small text-secondary mb-0">See details</h5>
                                     </div>
                                 </div>
@@ -169,43 +205,7 @@
                                 <div class="col-9">
                                     <div class="card-body text-right p-3">
                                         <h5 class="text_small text-secondary mb-0">Total Visitors</h5>
-                                        <div class="project_status_count fw-bold">250</div>
-                                        <h5 class="text_small text-secondary mb-0">See details</h5>
-                                    </div>
-                                </div>
-                                <div class="col-3 p-1">
-                                    <div class="count_icon">
-                                        <img src="./Assets/image/student.png" class="img-fluid rounded-start" alt="...">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card mb-3">
-                            <div class="row g-0 align-items-center justify-content-between">
-                                <div class="col-9">
-                                    <div class="card-body text-right p-3">
-                                        <h5 class="text_small text-secondary mb-0">Total Visitors</h5>
-                                        <div class="project_status_count fw-bold">250</div>
-                                        <h5 class="text_small text-secondary mb-0">See details</h5>
-                                    </div>
-                                </div>
-                                <div class="col-3 p-1">
-                                    <div class="count_icon">
-                                        <img src="./Assets/image/student.png" class="img-fluid rounded-start" alt="...">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card mb-3">
-                            <div class="row g-0 align-items-center justify-content-between">
-                                <div class="col-9">
-                                    <div class="card-body text-right p-3">
-                                        <h5 class="text_small text-secondary mb-0">Total Visitors</h5>
-                                        <div class="project_status_count fw-bold">250</div>
+                                        <div class="project_status_count fw-bold" id="totalvisitor">0</div>
                                         <h5 class="text_small text-secondary mb-0">See details</h5>
                                     </div>
                                 </div>
@@ -228,6 +228,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="../script.js"></script>
     <script src="footer.js"></script>
+    <script src="dashboard.js"></script>
 </body>
 
 </html>
