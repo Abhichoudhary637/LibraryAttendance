@@ -276,7 +276,7 @@ ipcMain.on('getCountData', (event, data) => {
 
   let responsedata = {};
   responsedata['code'] = '500';
-  let query = 'select * from SELECT v.usertype, COUNT(vl.id) AS entry_count FROM visitor v JOIN visitor_log vl ON v.id = vl.visitor_id WHERE v.visit_date = CURRENT_DATE() GROUP BY v.usertype';
+  let query = 'SELECT v.usertype, COUNT(vl.id) AS entry_count FROM visitor v JOIN visitor_log vl ON v.id = vl.visitor_id WHERE v.visit_date = CURRENT_DATE() GROUP BY v.usertype';
   connection.query(query, (err, results) => {
     if (err) {
       console.log(err);
@@ -286,13 +286,9 @@ ipcMain.on('getCountData', (event, data) => {
       console.error('Error saving data to MySQL:', err);
       event.reply('getCountDataRes', responsedata);
     } else {
-      let responseobj = {};
-      results?.forEach(obj => {
-        responseobj[obj?.usertype] = obj?.entry_count
-      });
       responsedata['code'] = '200';
       responsedata['message'] = 'Successful';
-      responsedata['data'] = responseobj;
+      responsedata['data'] = results;
       event.reply('getCountDataRes', responsedata);
     }
   });
