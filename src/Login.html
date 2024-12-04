@@ -82,6 +82,8 @@ ipcRenderer.on('save-data-response', (event, arg) => {
   }
 
   alert(arg.message);
+  localStorage.setItem("username", arg.username);
+  localStorage.setItem("details", arg.details);
   window.location.href = 'adminDashboard.html';
 //   console.log('Results:', arg.results);
 //   document.getElementById('data').innerText = JSON.stringify(arg.results, null, 2);

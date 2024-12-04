@@ -120,13 +120,15 @@ ipcMain.on('login-controller', (event, data) => {
         event.reply('save-data-response', responsedata);
       } else {
         let isadmin = false;
+        let userdetails = "Library Watchman";
         if (results.usertype == 1){
           isadmin = true;
+          userdetails = "Library Admin";
         }
         // console.log("Successfully");
         const query = 'INSERT INTO app_login_info (userid,logindatetime,createdon,name) VALUES (?,?,?,?)';
         connection.query(query, [data.userid,new Date(),new Date()
-        ,results[0].name], (err, results) => {
+        ,results[0].name], (err) => {
           if (err) {
             responsedata['error'] = err;
             console.error('Error saving data to MySQL:', err);
@@ -135,6 +137,8 @@ ipcMain.on('login-controller', (event, data) => {
             responsedata['code'] = '200';
             responsedata['message'] = 'Successfully Login';
             responsedata['isadmin'] = isadmin;
+            responsedata['username'] = results[0].name;
+            responsedata['details'] = userdetails;
             event.reply('save-data-response', responsedata);
           }
         });
