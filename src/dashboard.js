@@ -26,3 +26,7 @@ ipcRenderer.on('getCountDataRes', (event, args) => {
     document.getElementById("otherVisitCount").innerText = args?.data?.other || 0;
     document.getElementById("totalvisitor").innerText = totalcount;
 });
+
+function getVisitorData(){
+    
+}
