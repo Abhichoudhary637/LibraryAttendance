@@ -79,7 +79,7 @@ ipcRenderer.on('getVisitorDataRes', (event, args) => {
                                             </div>`;
     html += `<div class="col-12 mb-2 mt-4 text-right">
                                                 <button class="btn btn-dark px-4" id="checkInCheckOutButton">
-                                                    <div class="text_small" id="checkInCheckOutButtonText">`+ showButton + `</div>
+                                                    <div class="text_small" id="checkInCheckOutButtonText(`+visitorData?.membership_id+`, `+visitorData?.visitor_id+`)">`+ showButton + `</div>
                                                 </button>
                                             </div>
                                         </div>`;

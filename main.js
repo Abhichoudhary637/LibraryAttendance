@@ -345,7 +345,7 @@ ipcMain.on('getVisitorData', async (event, data) => {
     if (visitorData?.membership_id) {
       console.log("339>>>");
       const logQuery = `
-        SELECT v.visit_date, vl.entry_time, v.usertype 
+        SELECT v.visit_date, vl.entry_time, v.usertype,v.id 
         FROM visitor v 
         JOIN visitor_log vl ON v.id = vl.visitor_id 
         WHERE v.membership_id = ${visitorData.membership_id} AND vl.exit_time IS NULL`;
@@ -356,6 +356,7 @@ ipcMain.on('getVisitorData', async (event, data) => {
           visitorData.usertype = results[0].usertype;
           visitorData.entry_time = results[0].entry_time;
           visitorData.visit_date = results[0].visit_date;
+          visitorData.visitor_id = results[0].id;
         }
       } catch (err) {
         console.log("355>>>");
