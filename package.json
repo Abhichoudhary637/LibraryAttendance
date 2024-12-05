@@ -19,6 +19,7 @@
     },
     "build": {
         "appId": "com.example.libraryattendance",
+        "productName": "Library",
         "win": {
             "target": "libraryattendance",
             "icon": "build/icon.jpg"
