@@ -105,7 +105,7 @@ ipcMain.on('login-controller', (event, data) => {
   let responsedata = {};
   responsedata['code'] = '500';
   const loginquery = 'select * from app_users where userid=? and password = ? and (status = 1 or status is null)';
-  connection.query(loginquery, [data.userid,data.password], (err, results) => {
+  connection.query(loginquery, [data.userid, data.password], (err, results) => {
     if (err) {
       console.log(err);
       responsedata['message'] = 'Login Failed';
@@ -115,35 +115,35 @@ ipcMain.on('login-controller', (event, data) => {
       event.reply('save-data-response', responsedata);
     } else {
       // console.log(results)
-      if (results == undefined || results == null || results.length == 0){
+      if (results == undefined || results == null || results.length == 0) {
         responsedata['message'] = 'Userid is not existing';
         event.reply('save-data-response', responsedata);
       } else {
         let isadmin = false;
         let userdetails = "Library Watchman";
-        if (results.usertype == 1){
+        if (results.usertype == 1) {
           isadmin = true;
           userdetails = "Library Admin";
         }
         // console.log("Successfully");
         const query = 'INSERT INTO app_login_info (userid,logindatetime,createdon,name) VALUES (?,?,?,?)';
-        connection.query(query, [data.userid,new Date(),new Date()
-        ,results[0].name], (err) => {
-          if (err) {
-            responsedata['error'] = err;
-            console.error('Error saving data to MySQL:', err);
-            event.reply('save-data-response', responsedata);
-          } else {
-            responsedata['code'] = '200';
-            responsedata['message'] = 'Successfully Login';
-            responsedata['isadmin'] = isadmin;
-            responsedata['username'] = results[0].name;
-            responsedata['details'] = userdetails;
-            event.reply('save-data-response', responsedata);
-          }
-        });
+        connection.query(query, [data.userid, new Date(), new Date()
+          , results[0].name], (err) => {
+            if (err) {
+              responsedata['error'] = err;
+              console.error('Error saving data to MySQL:', err);
+              event.reply('save-data-response', responsedata);
+            } else {
+              responsedata['code'] = '200';
+              responsedata['message'] = 'Successfully Login';
+              responsedata['isadmin'] = isadmin;
+              responsedata['username'] = results[0].name;
+              responsedata['details'] = userdetails;
+              event.reply('save-data-response', responsedata);
+            }
+          });
       }
-    
+
       closeMysqlConnection();
       // event.reply('save-data-response', 'success');
     }
@@ -157,8 +157,8 @@ ipcMain.on('getStudents', (event, data) => {
   let responsedata = {};
   responsedata['code'] = '500';
   let studentquery = 'select * from students';
-  if (data.fts != undefined && data.fts != null && data.fts != ""){
-    studentquery += " where name like %"+data.fts+"%";
+  if (data.fts != undefined && data.fts != null && data.fts != "") {
+    studentquery += " where name like %" + data.fts + "%";
   }
 
   studentquery += " order by id desc";
@@ -190,23 +190,23 @@ ipcMain.on('saveStudentData', (event, studentData) => {
 
   responsedata['code'] = '500';
   const query = 'INSERT INTO students (student_id,name,course,branch,session,regdate, regexpdate, father, mother, emailid, mobileno, address, imagepath) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)';
-        connection.query(query, [data.studentid,data.studentname,data.course, data.branch, data.session, data.registrationdate, data.expirationdate, data.fathername, data.mothername, data.emailid, data.mobileno, data.address,imageData
-        ], (err, results) => {
-          if (err) {
-            console.log(err);
-            responsedata['message'] = 'Unable to Save';
-            responsedata['code'] = '500';
-            responsedata['error'] = err;
-            console.error('Error saving data to MySQL:', err);
-            event.reply('getStudentResOnSave', responsedata);
-          } else {
-            console.log("test200")
-            responsedata['code'] = '200';
-            responsedata['message'] = 'Successful';
-            responsedata['data'] = [];
-            event.reply('getStudentResOnSave', responsedata);
-          }
-        });
+  connection.query(query, [data.studentid, data.studentname, data.course, data.branch, data.session, data.registrationdate, data.expirationdate, data.fathername, data.mothername, data.emailid, data.mobileno, data.address, imageData
+  ], (err, results) => {
+    if (err) {
+      console.log(err);
+      responsedata['message'] = 'Unable to Save';
+      responsedata['code'] = '500';
+      responsedata['error'] = err;
+      console.error('Error saving data to MySQL:', err);
+      event.reply('getStudentResOnSave', responsedata);
+    } else {
+      console.log("test200")
+      responsedata['code'] = '200';
+      responsedata['message'] = 'Successful';
+      responsedata['data'] = [];
+      event.reply('getStudentResOnSave', responsedata);
+    }
+  });
 
   closeMysqlConnection();
 });
@@ -217,8 +217,8 @@ ipcMain.on('getEmployee', (event, data) => {
   let responsedata = {};
   responsedata['code'] = '500';
   let employeequery = 'select * from employee';
-  if (data.fts != undefined && data.fts != null && data.fts != ""){
-    employeequery += " where name like %"+data.fts+"%";
+  if (data.fts != undefined && data.fts != null && data.fts != "") {
+    employeequery += " where name like %" + data.fts + "%";
   }
 
   employeequery += ' order by id desc';
@@ -250,23 +250,23 @@ ipcMain.on('saveEmployeeData', (event, studentData) => {
   let responsedata = {};
   responsedata['code'] = '500';
   const query = 'INSERT INTO employee (employee_id,name,department,designation,regdate,regexpdate, emailid, mobileno, address,imagepath) VALUES (?,?,?,?,?,?,?,?,?,?)';
-        connection.query(query, [data.employeeid,data.employeename,data.department, data.designation, data.registrationdate, data.expirationdate,data.emailid, data.mobileno, data.address,imageData
-        ], (err, results) => {
-          if (err) {
-            console.log(err);
-            responsedata['message'] = 'Unable to Save';
-            responsedata['code'] = '500';
-            responsedata['error'] = err;
-            console.error('Error saving data to MySQL:', err);
-            event.reply('getEmployeeResOnSave', responsedata);
-          } else {
-            console.log("test200")
-            responsedata['code'] = '200';
-            responsedata['message'] = 'Successful';
-            responsedata['data'] = [];
-            event.reply('getEmployeeResOnSave', responsedata);
-          }
-        });
+  connection.query(query, [data.employeeid, data.employeename, data.department, data.designation, data.registrationdate, data.expirationdate, data.emailid, data.mobileno, data.address, imageData
+  ], (err, results) => {
+    if (err) {
+      console.log(err);
+      responsedata['message'] = 'Unable to Save';
+      responsedata['code'] = '500';
+      responsedata['error'] = err;
+      console.error('Error saving data to MySQL:', err);
+      event.reply('getEmployeeResOnSave', responsedata);
+    } else {
+      console.log("test200")
+      responsedata['code'] = '200';
+      responsedata['message'] = 'Successful';
+      responsedata['data'] = [];
+      event.reply('getEmployeeResOnSave', responsedata);
+    }
+  });
 
   closeMysqlConnection();
 });
@@ -302,7 +302,7 @@ ipcMain.on('getVisitorData', async (event, data) => {
     handleDisconnect();
 
     console.log("302>>>");
-  
+
     responsedata['code'] = '500';
     let visitorData = {};
     let isErrorOccurred = false;
@@ -324,6 +324,7 @@ ipcMain.on('getVisitorData', async (event, data) => {
       if (students.length > 0) {
         console.log("314>>>");
         visitorData = students[0];
+        visitorData.usertype = "student";
         visitorData.membership_id = students[0].id;
       } else {
         let employeequery = `SELECT * FROM employees e WHERE e.employee_id=${data?.visitorCode}`;
@@ -332,6 +333,7 @@ ipcMain.on('getVisitorData', async (event, data) => {
         if (employees.length > 0) {
           console.log("326>>>");
           visitorData = employees[0];
+          visitorData.usertype = "employee";
           visitorData.membership_id = employees[0].id;
         }
       }
@@ -380,5 +382,67 @@ ipcMain.on('getVisitorData', async (event, data) => {
     event.reply('getVisitorDataRes', responsedata);
     closeMysqlConnection();
   }
+});
+
+ipcMain.on('checkInCheck', (event, visitorObj) => {
+  handleDisconnect();
+
+  let responsedata = {};
+  const visitor_id = visitorObj?.visitor_id;
+  const membership_id = visitorObj?.membership_id;
+  const usertype = visitorObj?.usertype;
+  responsedata['code'] = '500';
+  if (visitor_id) {
+    const query = 'update visitor_log set exit_time = CURRENT_TIME() where visitor_id = ' + visitor_id + '';
+    connection.query(query, (err, results) => {
+      if (err) {
+        console.log(err);
+        responsedata['message'] = 'Unable to Save';
+        responsedata['code'] = '500';
+        responsedata['error'] = err;
+        console.error('Error saving data to MySQL:', err);
+        event.reply('checkInCheckRes', responsedata);
+      } else {
+        responsedata['code'] = '200';
+        responsedata['message'] = 'Successful';
+        responsedata['data'] = [];
+        event.reply('checkInCheckRes', responsedata);
+      }
+    });
+  } else {
+    const query = 'INSERT INTO visitor (membership_id, usertype, visit_date) VALUES (?, ?, CURRENT_DATE())';
+    connection.query(query, [membership_id, usertype], (err, results) => {
+      if (err) {
+        console.log(err);
+        responsedata['message'] = 'Unable to Save';
+        responsedata['code'] = '500';
+        responsedata['error'] = err;
+        console.error('Error saving data to MySQL:', err);
+        event.reply('checkInCheckRes', responsedata);
+      } else {
+        console.log("TEST");
+        let visitId = results?.insertId;
+        console.log(visitId);
+        const query = 'INSERT INTO visitor_log (visitor_id, entry_time, exit_time) VALUES (?, CURRENT_TIME(), NULL)';
+        connection.query(query, [visitId], (err, results) => {
+          if (err) {
+            console.log(err);
+            responsedata['message'] = 'Unable to Save';
+            responsedata['code'] = '500';
+            responsedata['error'] = err;
+            console.error('Error saving data to MySQL:', err);
+            event.reply('checkInCheckRes', responsedata);
+          } else {
+            responsedata['code'] = '200';
+            responsedata['message'] = 'Successful';
+            responsedata['data'] = [];
+            event.reply('checkInCheckRes', responsedata);
+          }
+        });
+      }
+    });
+  }
+
+  // closeMysqlConnection();
 });
 

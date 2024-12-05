@@ -79,11 +79,26 @@ ipcRenderer.on('getVisitorDataRes', (event, args) => {
                                             </div>`;
     html += `<div class="col-12 mb-2 mt-4 text-right">
                                                 <button class="btn btn-dark px-4" id="checkInCheckOutButton">
-                                                    <div class="text_small" id="checkInCheckOutButtonText(`+visitorData?.membership_id+`, `+visitorData?.visitor_id+`)">`+ showButton + `</div>
+                                                    <div class="text_small" onclick="checkInCheck(`+visitorData?.membership_id+`, `+visitorData?.visitor_id+`,'`+visitorData.usertype+`')">`+ showButton + `</div>
                                                 </button>
                                             </div>
                                         </div>`;
 
     document.getElementById("visit_info").innerHTML = html;
     document.getElementById('visitCard').classList.remove("d-none");
+});
+
+function checkInCheck(membership_id, visitor_id, usertype){
+    ipcRenderer.send('checkInCheck', { membership_id, visitor_id, usertype });
+}
+
+ipcRenderer.on('checkInCheckRes', (event, args) => {
+    if (args.code != 200) {
+        console.error('Error:', args.error);
+        alert(args.message);
+        return;
+    }
+
+    alert(args.message);
+    location.reload();
 });
