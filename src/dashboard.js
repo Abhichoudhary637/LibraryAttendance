@@ -3,23 +3,23 @@ document.addEventListener('DOMContentLoaded', () => {
     getDashboardCountData();
 });
 
-function getDashboardCountData(){
-    ipcRenderer.send('getCountData', { });
+function getDashboardCountData() {
+    ipcRenderer.send('getCountData', {});
 }
 
 ipcRenderer.on('getCountDataRes', (event, args) => {
     if (args.code != 200) {
         console.error('Error:', args.error);
-        alert(arg.message);
+        alert(args.message);
         return;
     }
 
     let responseobj = {};
     let totalcount = 0;
-     args?.data?.forEach(obj => {
+    args?.data?.forEach(obj => {
         totalcount = totalcount + Number(obj?.entry_count);
         responseobj[obj?.usertype] = obj?.entry_count;
-      });
+    });
 
     document.getElementById("studentVisitorCount").innerText = responseobj?.student || 0;
     document.getElementById("empVisitorCount").innerText = responseobj?.employee || 0;
@@ -27,7 +27,7 @@ ipcRenderer.on('getCountDataRes', (event, args) => {
     document.getElementById("totalvisitor").innerText = totalcount;
 });
 
-function getVisitorData(){
+function getVisitorData() {
     let visitorCode = document.getElementById("visitorCode").value
     ipcRenderer.send('getVisitorData', { visitorCode });
 }
@@ -35,9 +35,55 @@ function getVisitorData(){
 ipcRenderer.on('getVisitorDataRes', (event, args) => {
     if (args.code != 200) {
         console.error('Error:', args.error);
-        alert(arg.message);
+        alert(args.message);
         return;
     }
 
-    console.log(args);
+    let visitorData = args?.data;
+    let showButton = "Check-In";
+    if (visitorData?.entry_time) {
+        showButton = "Check-Out";
+    }
+
+    let imageData = "./Assets/image/student-preview.png"
+    if (visitorData?.imagepath) {
+        imageData = `data:image;base64,${Buffer.from(visitorData.imagepath).toString('base64')}`;
+    }
+    document.getElementById("visit_name").innerText = visitorData?.name;
+    document.getElementById("visit_image").src = imageData;
+    let html = `<div class="row">
+                                            <div class="col-md-6 text_mid mb-2">
+                                                <div>Mobile No.</div>
+                                                <div class="fw-bold">`+ visitorData?.mobileno + `</div>
+                                            </div>
+                                            <div class="col-md-6 text_mid  mb-2">
+                                                <div>Email ID</div>
+                                                <div class="fw-bold">`+ visitorData?.emailid + `</div>
+                                            </div>`;
+
+    if (visitorData?.usertype == "student") {
+        html += `<div class="col-md-6 text_mid  mb-2">
+        <div>Course</div>
+        <div class="fw-bold">`+ visitorData?.course + `</div>
+    </div>`;
+    } else if (visitorData?.usertype == "employee") {
+        html += `<div class="col-md-6 text_mid  mb-2">
+                                                <div>Designation</div>
+                                                <div class="fw-bold">`+ visitorData?.designation + `</div>
+                                            </div>`;
+    }
+
+    html += ` <div class="col-md-6 text_mid  mb-2">
+                                                <div>Address</div>
+                                                <div class="fw-bold">`+ visitorData?.address + `</div>
+                                            </div>`;
+    html += `<div class="col-12 mb-2 mt-4 text-right">
+                                                <button class="btn btn-dark px-4" id="checkInCheckOutButton">
+                                                    <div class="text_small" id="checkInCheckOutButtonText">`+ showButton + `</div>
+                                                </button>
+                                            </div>
+                                        </div>`;
+
+    document.getElementById("visit_info").innerHTML = html;
+    document.getElementById('visitCard').classList.remove("d-none");
 });
