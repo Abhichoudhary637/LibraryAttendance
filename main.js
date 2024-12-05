@@ -296,3 +296,88 @@ ipcMain.on('getCountData', (event, data) => {
   closeMysqlConnection();
 });
 
+ipcMain.on('getVisitorData', async (event, data) => {
+  let responsedata = {};
+  try {
+    handleDisconnect();
+
+    console.log("302>>>");
+  
+    responsedata['code'] = '500';
+    let visitorData = {};
+    let isErrorOccurred = false;
+
+    // Function to execute a query and return a Promise
+    const queryPromise = (query) => {
+      return new Promise((resolve, reject) => {
+        connection.query(query, (err, results) => {
+          if (err) reject(err);
+          else resolve(results);
+        });
+      });
+    };
+
+    try {
+      let studentquery = `SELECT * FROM students s WHERE s.student_id=${data?.visitorCode}`;
+      const students = await queryPromise(studentquery);
+
+      if (students.length > 0) {
+        console.log("314>>>");
+        visitorData = students[0];
+        visitorData.membership_id = students[0].id;
+      } else {
+        let employeequery = `SELECT * FROM employees e WHERE e.employee_id=${data?.visitorCode}`;
+        const employees = await queryPromise(employeequery);
+
+        if (employees.length > 0) {
+          console.log("326>>>");
+          visitorData = employees[0];
+          visitorData.membership_id = employees[0].id;
+        }
+      }
+    } catch (err) {
+      console.log("310>>>");
+      isErrorOccurred = true;
+      throw err; // Bubble up error for handling
+    }
+
+    // Fetch additional visitor log data if membership_id is found
+    if (visitorData?.membership_id) {
+      console.log("339>>>");
+      const logQuery = `
+        SELECT v.visit_date, vl.entry_time, v.usertype 
+        FROM visitor v 
+        JOIN visitor_log vl ON v.id = vl.visitor_id 
+        WHERE v.membership_id = ${visitorData.membership_id} AND vl.exit_time IS NULL`;
+
+      try {
+        const results = await queryPromise(logQuery);
+        if (results.length > 0) {
+          visitorData.usertype = results[0].usertype;
+          visitorData.entry_time = results[0].entry_time;
+          visitorData.visit_date = results[0].visit_date;
+        }
+      } catch (err) {
+        console.log("355>>>");
+        isErrorOccurred = true;
+        throw err;
+      }
+    }
+
+    if (!isErrorOccurred) {
+      console.log("363>>>");
+      responsedata['message'] = 'Successful';
+      responsedata['code'] = '200';
+      responsedata['data'] = visitorData;
+    }
+  } catch (err) {
+    console.error("Error:", err);
+    responsedata['message'] = 'Error in getting data';
+    responsedata['code'] = '500';
+    responsedata['error'] = err;
+  } finally {
+    event.reply('getVisitorDataRes', responsedata);
+    closeMysqlConnection();
+  }
+});
+
