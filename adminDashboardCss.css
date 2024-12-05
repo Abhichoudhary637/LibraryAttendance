@@ -99,7 +99,7 @@ header {
     content: '';
     width: 100%;
     height: 200vh;
-    background-color: #0000006b;
+    
     position: absolute;
     top: 0;
 }
