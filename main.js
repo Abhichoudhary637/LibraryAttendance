@@ -327,7 +327,7 @@ ipcMain.on('getVisitorData', async (event, data) => {
         visitorData.usertype = "student";
         visitorData.membership_id = students[0].id;
       } else {
-        let employeequery = `SELECT * FROM employees e WHERE e.employee_id=${data?.visitorCode}`;
+        let employeequery = `SELECT * FROM employee e WHERE e.employee_id=${data?.visitorCode}`;
         const employees = await queryPromise(employeequery);
 
         if (employees.length > 0) {
@@ -384,65 +384,51 @@ ipcMain.on('getVisitorData', async (event, data) => {
   }
 });
 
-ipcMain.on('checkInCheck', (event, visitorObj) => {
-  handleDisconnect();
 
+ipcMain.on('checkInCheck', async (event, visitorObj) => {
   let responsedata = {};
-  const visitor_id = visitorObj?.visitor_id;
-  const membership_id = visitorObj?.membership_id;
-  const usertype = visitorObj?.usertype;
-  responsedata['code'] = '500';
-  if (visitor_id) {
-    const query = 'update visitor_log set exit_time = CURRENT_TIME() where visitor_id = ' + visitor_id + '';
-    connection.query(query, (err, results) => {
-      if (err) {
-        console.log(err);
-        responsedata['message'] = 'Unable to Save';
-        responsedata['code'] = '500';
-        responsedata['error'] = err;
-        console.error('Error saving data to MySQL:', err);
-        event.reply('checkInCheckRes', responsedata);
-      } else {
-        responsedata['code'] = '200';
-        responsedata['message'] = 'Successful';
-        responsedata['data'] = [];
-        event.reply('checkInCheckRes', responsedata);
-      }
-    });
-  } else {
-    const query = 'INSERT INTO visitor (membership_id, usertype, visit_date) VALUES (?, ?, CURRENT_DATE())';
-    connection.query(query, [membership_id, usertype], (err, results) => {
-      if (err) {
-        console.log(err);
-        responsedata['message'] = 'Unable to Save';
-        responsedata['code'] = '500';
-        responsedata['error'] = err;
-        console.error('Error saving data to MySQL:', err);
-        event.reply('checkInCheckRes', responsedata);
-      } else {
-        console.log("TEST");
-        let visitId = results?.insertId;
-        console.log(visitId);
-        const query = 'INSERT INTO visitor_log (visitor_id, entry_time, exit_time) VALUES (?, CURRENT_TIME(), NULL)';
-        connection.query(query, [visitId], (err, results) => {
-          if (err) {
-            console.log(err);
-            responsedata['message'] = 'Unable to Save';
-            responsedata['code'] = '500';
-            responsedata['error'] = err;
-            console.error('Error saving data to MySQL:', err);
-            event.reply('checkInCheckRes', responsedata);
-          } else {
-            responsedata['code'] = '200';
-            responsedata['message'] = 'Successful';
-            responsedata['data'] = [];
-            event.reply('checkInCheckRes', responsedata);
-          }
+  try {
+    handleDisconnect();
+    const visitor_id = visitorObj?.visitor_id;
+    const membership_id = visitorObj?.membership_id;
+    const usertype = visitorObj?.usertype;
+    responsedata['code'] = '500';
+
+    // Function to execute a query and return a Promise
+    const queryPromise = (query) => {
+      return new Promise((resolve, reject) => {
+        connection.query(query, (err, results) => {
+          if (err) reject(err);
+          else resolve(results);
         });
+      });
+    };
+
+    if (visitor_id) {
+      const updatequery = 'update visitor_log set exit_time = CURRENT_TIME() where visitor_id = ' + visitor_id + '';
+      const results = await queryPromise(updatequery);
+    } else {
+      const visitorquery = 'INSERT INTO visitor (membership_id, usertype, visit_date) VALUES (' + membership_id + ', "' + usertype + '", CURRENT_DATE())';
+      const visitorResults = await queryPromise(visitorquery);
+      if (visitorResults?.insertId) {
+        let visitId = visitorResults?.insertId;
+        console.log("TESTHERE");
+        console.log("visitId>>> " + visitId);
+        const logQuery = 'INSERT INTO visitor_log (visitor_id, entry_time, exit_time) VALUES (' + visitId + ', CURRENT_TIME(), NULL)';
+        const results = await queryPromise(logQuery);
       }
-    });
+    }
+
+    responsedata['message'] = 'Successful';
+      responsedata['code'] = '200';
+      responsedata['data'] = [];
+  } catch (err) {
+    console.error("Error:", err);
+    responsedata['message'] = 'Error in getting data';
+    responsedata['code'] = '500';
+    responsedata['error'] = err;
+  } finally {
+    event.reply('checkInCheckRes', responsedata);
+    closeMysqlConnection();
   }
-
-  // closeMysqlConnection();
 });
-

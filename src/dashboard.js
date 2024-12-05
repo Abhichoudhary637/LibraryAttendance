@@ -51,6 +51,10 @@ ipcRenderer.on('getVisitorDataRes', (event, args) => {
     }
     document.getElementById("visit_name").innerText = visitorData?.name;
     document.getElementById("visit_image").src = imageData;
+    let visitor_id = null;
+    if (visitorData?.visitor_id){
+        visitor_id = visitorData?.visitor_id
+    }
     let html = `<div class="row">
                                             <div class="col-md-6 text_mid mb-2">
                                                 <div>Mobile No.</div>
@@ -78,8 +82,8 @@ ipcRenderer.on('getVisitorDataRes', (event, args) => {
                                                 <div class="fw-bold">`+ visitorData?.address + `</div>
                                             </div>`;
     html += `<div class="col-12 mb-2 mt-4 text-right">
-                                                <button class="btn btn-dark px-4" id="checkInCheckOutButton">
-                                                    <div class="text_small" onclick="checkInCheck(`+visitorData?.membership_id+`, `+visitorData?.visitor_id+`,'`+visitorData.usertype+`')">`+ showButton + `</div>
+                                                <button class="btn btn-dark px-4" onclick="checkInCheck(`+visitorData?.membership_id+`, `+visitor_id+`,'`+visitorData.usertype+`')" id="checkInCheckOutButton">
+                                                    <div class="text_small">`+ showButton + `</div>
                                                 </button>
                                             </div>
                                         </div>`;
