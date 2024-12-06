@@ -106,3 +106,32 @@ ipcRenderer.on('checkInCheckRes', (event, args) => {
     alert(args.message);
     location.reload();
 });
+
+// //////////////////////
+let html5QrCode;
+
+document.getElementById('startScanner').addEventListener('click', function() {
+    if (!html5QrCode) {
+        html5QrCode = new Html5Qrcode("scanner");
+    }
+    html5QrCode.start(
+        { facingMode: "environment" }, // Use the rear camera
+        {
+            fps: 10, // Frames per second
+            qrbox: { width: 300, height: 100 } // Wider scanning area for barcodes
+        },
+        (visitorCode, decodedResult) => {
+            // Successfully scanned a barcode
+            // console.log(`Barcode detected: ${decodedText}`);
+            // alert(`Barcode Content: ${decodedText}`);
+            ipcRenderer.send('getVisitorData', { visitorCode });
+            html5QrCode.stop(); // Stop scanning after a successful scan
+        },
+        (error) => {
+            // Called for every failed attempt
+            console.warn(`Scanning error: ${error}`);
+        }
+    ).catch((err) => {
+        console.error(`Error starting the scanner: ${err}`);
+    });
+});
