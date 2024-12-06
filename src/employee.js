@@ -24,7 +24,7 @@ ipcRenderer.on('getEmployeeRes', (event, arg) => {
             imageData = `data:image;base64,${Buffer.from(obj.imagepath).toString('base64')}`;
         }
         employeedata += '<tr>';
-        employeedata += ' <td><img src="'+imageData+'"> '+obj?.name+' | '+obj?.employee_id+'</td>';
+        employeedata += ' <td><img src="'+imageData+'" style="width: 40%; border: 1px solid gray; border-radius: 10px;" > '+obj?.name+' | '+obj?.employee_id+'</td>';
         employeedata += '<td>'+obj?.department+'</td>';
         employeedata += '<td>'+obj?.designation+'</td>';
         employeedata += ' <td>'+obj?.mobileno+'</td>';
