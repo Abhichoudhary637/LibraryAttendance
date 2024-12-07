@@ -22,8 +22,15 @@
     "build": {
         "appId": "com.example.libraryattendance",
         "productName": "Library",
+        "files": [
+            "dist/**/*",
+            "main.js"
+        ],
+        "directories": {
+            "output": "dist"
+        },
         "win": {
-            "target": "libraryattendance",
+            "target": "nsis",
             "icon": "build/icon.jpg"
         }
     }
