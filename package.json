@@ -2,6 +2,8 @@
     "name": "libraryattendance",
     "version": "1.0.0",
     "main": "main.js",
+    "description": "Library Attedance",
+    "author": "Abhishek Choudhary abhsiehkedu.ch@gmail.com",
     "scripts": {
         "start": "electron .",
         "build": "electron-builder"
