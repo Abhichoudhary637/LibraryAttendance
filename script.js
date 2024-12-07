@@ -1,3 +1,44 @@
+// Get modal and buttons
+const modal = document.getElementById("fileModal");
+const openModalBtn = document.getElementById("openModalBtn");
+const closeBtn = document.getElementById("closeBtn");
+const cancelBtn = document.getElementById("cancelBtn");
+const saveBtn = document.getElementById("saveBtn");
+const fileInput = document.getElementById("fileInput");
+
+// Open modal when the button is clicked
+openModalBtn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// Close modal when the close (X) button is clicked
+closeBtn.onclick = function() {
+  modal.style.display = "none";
+}
+
+// Close modal when the cancel button is clicked
+cancelBtn.onclick = function() {
+  modal.style.display = "none";
+}
+
+// Save the file (this is a placeholder for actual file handling)
+saveBtn.onclick = function() {
+  const file = fileInput.files[0];
+  if (file) {
+    alert("File '" + file.name + "' selected.");
+  } else {
+    alert("No file selected.");
+  }
+  modal.style.display = "none";
+}
+
+// Close modal if the user clicks outside of the modal
+window.onclick = function(event) {
+  if (event.target === modal) {
+    modal.style.display = "none";
+  }
+}
+
 function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
     const pageBg = document.getElementById('bg_transparent');
