@@ -15,7 +15,7 @@
     },
     "devDependencies": {
         "electron": "^25.3.0",
-        "electron-builder": "^25.0.0-alpha.9",
+        "electron-builder": "^25.1.8",
         "electron-reload": "^2.0.0-alpha.1",
         "electron-reloader": "^1.2.3"
     },
@@ -28,6 +28,12 @@
         "win": {
             "target": "nsis",
             "icon": "build/icon.ico"
-        }
+        },
+        "extraResources": [
+            {
+                "from": "node_modules/electron/dist/ffmpeg.dll",
+                "to": "ffmpeg.dll"
+            }
+        ]
     }
 }
