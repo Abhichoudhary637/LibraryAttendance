@@ -22,16 +22,12 @@
     "build": {
         "appId": "com.example.libraryattendance",
         "productName": "Library",
-        "files": [
-            "dist/**/*",
-            "main.js"
-        ],
-        "directories": {
-            "output": "dist"
+        "mac": {
+            "icon": "build/icon.jpg"
         },
         "win": {
             "target": "nsis",
-            "icon": "build/icon.jpg"
+            "icon": "build/icon.ico"
         }
     }
 }
