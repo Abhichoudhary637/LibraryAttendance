@@ -117,6 +117,67 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <!-- <div style="
+                                position: fixed;
+                                top: 0;
+                                left: 0;
+                                width: 100%;
+                                height: 100%;
+                                background-color: rgba(0, 0, 0, 0.6);
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                              ">
+                                <div style="
+                                  background-color: #fff;
+                                  width: 90%; /* Default to 90% of the screen width */
+                                  max-width: 400px; /* Prevent it from getting too wide on larger screens */
+                                  padding: 20px;
+                                  border-radius: 8px;
+                                  text-align: center;
+                                  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+                                ">
+                                  <h2 style="margin-bottom: 10px; font-size: 24px; color: #333;">Logout</h2>
+                                  <p style="margin-bottom: 20px; font-size: 16px; color: #555;">Are you sure you want to log out?</p>
+                                  <div style="
+                                    display: flex;
+                                    justify-content: space-between;
+                                    flex-wrap: wrap; /* Ensures buttons stack on smaller screens */
+                                    gap: 10px;
+                                  ">
+                                    <button style="
+                                      flex: 1; /* Ensure buttons grow and adjust their width */
+                                      padding: 10px;
+                                      font-size: 16px;
+                                      border: none;
+                                      border-radius: 4px;
+                                      cursor: pointer;
+                                      background-color: #e0e0e0;
+                                      color: #333;
+                                      transition: background-color 0.3s ease;
+                                      min-width: 100px; /* Minimum size for buttons */
+                                    "
+                                    onmouseover="this.style.backgroundColor='#d6d6d6';" 
+                                    onmouseout="this.style.backgroundColor='#e0e0e0';">Cancel</button>
+                                    <button style="
+                                      flex: 1;
+                                      padding: 10px;
+                                      font-size: 16px;
+                                      border: none;
+                                      border-radius: 4px;
+                                      cursor: pointer;
+                                      background-color: #007bff;
+                                      color: white;
+                                      transition: background-color 0.3s ease;
+                                      min-width: 100px;
+                                    "
+                                    onmouseover="this.style.backgroundColor='#0056b3';" 
+                                    onmouseout="this.style.backgroundColor='#007bff';">Logout</button>
+                                  </div>
+                                </div>
+                              </div> -->
+
                                 <!--------------------->
                             </div>
                         </div>
@@ -209,6 +270,23 @@
     <script src="../script.js"></script>
     <script src="footer.js"></script>
     <script src="dashboard.js"></script>
+    <script>
+        // JavaScript to handle modal open and close
+        const userView = document.getElementById('userView');
+        const modal = document.getElementById('logoutModal');
+        const cancelButton = document.getElementById('cancelButton');
+    
+        // Show modal when user view is clicked
+        userView.addEventListener('click', () => {
+          modal.classList.add('active');
+        });
+    
+        // Hide modal when cancel button is clicked
+        cancelButton.addEventListener('click', () => {
+          modal.classList.remove('active');
+        });
+      </script>
+    
 </body>
 
 </html>

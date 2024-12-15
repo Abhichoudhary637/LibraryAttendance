@@ -4,11 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Sidebar</title>
+    <title>Employee Dashboard</title>
     <link rel="stylesheet" href="dashboardStyle.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
@@ -51,6 +53,77 @@
         margin: 0 0 0 auto !important;
         right: 0;
     }
+
+    .modal1 {
+        display: none;
+        /* Hidden by default */
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.4);
+        /* Black background with opacity */
+    }
+
+    .modal-content1 {
+        background-color: white;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 400px;
+        text-align: center;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .close {
+        color: #aaa;
+        font-size: 28px;
+        font-weight: bold;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .modal-buttons {
+        margin-top: 20px;
+    }
+
+    button {
+        padding: 10px 20px;
+        margin: 10px;
+        cursor: pointer;
+        border: none;
+        border-radius: 4px;
+    }
+
+    #saveBtn {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    #cancelBtn {
+        background-color: #f44336;
+        color: white;
+    }
+
+    #openModalBtn1 {
+        padding: 10px 20px;
+        background-color: #008CBA;
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 4px;
+    }
 </style>
 
 <body>
@@ -64,61 +137,65 @@
                 </div>
                 <div class="modal-body">
                     <form id="employeeForm" name="employeeForm" action="#">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <label class="form-label">Employee ID</label>
-                            <input type="text" id="employeeid" name="employeeid" placeholder="Employee ID" class="form-control">
-                        </div>
-                        <div class="col-sm-12">
-                            <label class="form-label">Employee Name</label>
-                            <input type="text" id="employeename" name="employeename" placeholder="Employee Name" class="form-control">
-                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <label class="form-label">Employee ID</label>
+                                <input type="text" id="employeeid" name="employeeid" placeholder="Employee ID"
+                                    class="form-control">
+                            </div>
+                            <div class="col-sm-12">
+                                <label class="form-label">Employee Name</label>
+                                <input type="text" id="employeename" name="employeename" placeholder="Employee Name"
+                                    class="form-control">
+                            </div>
 
-                        <div class="col-sm-12">
-                            <label class="form-label">Department</label>
-                            <input type="text" id="department" name="department" placeholder="Department" class="form-control">
-                        </div>
+                            <div class="col-sm-12">
+                                <label class="form-label">Department</label>
+                                <input type="text" id="department" name="department" placeholder="Department"
+                                    class="form-control">
+                            </div>
 
-                        <div class="col-sm-12">
-                            <label class="form-label">Designation</label>
-                            <input type="text" id="designation" name="designation" placeholder="Designation" class="form-control">
-                        </div>
-                        <div class="col-sm-12">
-                            <label class="form-label">Date of Registration</label>
-                            <input id="registrationdate" name="registrationdate" type="date"
-                                placeholder="Date of Registration" class="form-control">
-                        </div>
-                        <div class="col-sm-12">
-                            <label class="form-label">Date of Expiration</label>
-                            <input id="expirationdate" name="expirationdate" type="date"
-                                placeholder="Date of Expiration" class="form-control">
-                        </div>
-                        <div class="col-sm-12">
-                            <label class="form-label">Email Id</label>
-                            <input id="emailid" name="emailid" type="text" placeholder="Email Id"
-                                class="form-control">
-                        </div>
+                            <div class="col-sm-12">
+                                <label class="form-label">Designation</label>
+                                <input type="text" id="designation" name="designation" placeholder="Designation"
+                                    class="form-control">
+                            </div>
+                            <div class="col-sm-12">
+                                <label class="form-label">Date of Registration</label>
+                                <input id="registrationdate" name="registrationdate" type="date"
+                                    placeholder="Date of Registration" class="form-control">
+                            </div>
+                            <div class="col-sm-12">
+                                <label class="form-label">Date of Expiration</label>
+                                <input id="expirationdate" name="expirationdate" type="date"
+                                    placeholder="Date of Expiration" class="form-control">
+                            </div>
+                            <div class="col-sm-12">
+                                <label class="form-label">Email Id</label>
+                                <input id="emailid" name="emailid" type="text" placeholder="Email Id"
+                                    class="form-control">
+                            </div>
 
 
-                        <div class="col-sm-12">
-                            <label class="form-label">Mobile No</label>
-                            <input id="mobileno" name="mobileno" type="text" placeholder="Mobile No"
-                                class="form-control">
-                        </div>
+                            <div class="col-sm-12">
+                                <label class="form-label">Mobile No</label>
+                                <input id="mobileno" name="mobileno" type="text" placeholder="Mobile No"
+                                    class="form-control">
+                            </div>
 
-                        <div class="col-sm-12">
-                            <label class="form-label">Address</label>
-                            <input id="address" name="address" type="text" placeholder="Address"
-                                class="form-control">
-                        </div>
+                            <div class="col-sm-12">
+                                <label class="form-label">Address</label>
+                                <input id="address" name="address" type="text" placeholder="Address"
+                                    class="form-control">
+                            </div>
 
-                        <div class="col-sm-12 mt-3">
-                            <label class="form-label">Employee Image</label>
-                            <input id="employee_image" name="employee_image" type="file" placeholder="Employee Image"
-                                class="form-control">
+                            <div class="col-sm-12 mt-3">
+                                <label class="form-label">Employee Image</label>
+                                <input id="employee_image" name="employee_image" type="file"
+                                    placeholder="Employee Image" class="form-control">
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -127,6 +204,21 @@
             </div>
         </div>
     </div>
+
+    <div id="fileModal" class="modal1">
+        <div class="modal-content1">
+            <span id="closeBtn" class="close">&times;</span>
+
+            <h2>Select a File</h2>
+            <input type="file" id="fileInput">
+            <div class="modal-buttons">
+                <button id="saveBtn">Save</button>
+                <button id="cancelBtn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+
     <header>
         <div class="d-flex align-items-center">
             <div class="burger-icon" onclick="toggleSidebar()">
@@ -153,7 +245,7 @@
 
         <div class="px-3">
             <section class="body_content mt-5 pt-5">
-                <h4 class="page_heading">Employee</h4>
+                <h4 class="page_heading">Employees</h4>
             </section>
 
 
@@ -175,36 +267,43 @@
                     <div class="col-sm-6 text-end">
                         <div class="button-container">
 
-                            <button class="add-button" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal"> 
-                                <svg id="baseline-add_circle_outline-24px" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
-                                    <path id="Path_918" data-name="Path 918" d="M0,0H20V20H0Z" fill="none"/>
-                                    <path id="Path_919" data-name="Path 919" d="M11.167,6.167H9.5V9.5H6.167v1.667H9.5V14.5h1.667V11.167H14.5V9.5H11.167ZM10.333,2a8.333,8.333,0,1,0,8.333,8.333A8.336,8.336,0,0,0,10.333,2Zm0,15A6.667,6.667,0,1,1,17,10.333,6.676,6.676,0,0,1,10.333,17Z" transform="translate(-0.333 -0.333)" fill="#fff"/>
-                                  </svg>Add</button>
+                            <button class="add-button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <svg id="baseline-add_circle_outline-24px" xmlns="http://www.w3.org/2000/svg" width="20"
+                                    height="20" viewBox="0 0 20 20">
+                                    <path id="Path_918" data-name="Path 918" d="M0,0H20V20H0Z" fill="none" />
+                                    <path id="Path_919" data-name="Path 919"
+                                        d="M11.167,6.167H9.5V9.5H6.167v1.667H9.5V14.5h1.667V11.167H14.5V9.5H11.167ZM10.333,2a8.333,8.333,0,1,0,8.333,8.333A8.336,8.336,0,0,0,10.333,2Zm0,15A6.667,6.667,0,1,1,17,10.333,6.676,6.676,0,0,1,10.333,17Z"
+                                        transform="translate(-0.333 -0.333)" fill="#fff" />
+                                </svg>Add</button>
 
 
-                          <input type="file" id="fileInput" style="display: none;" onchange="handleFileUpload(event)" />      
-                            <button 
-                            class="import-button" 
-                            onclick="triggerFileUpload()"
-                            >
+                            <input type="file" id="fileInput" style="display: none;"
+                                onchange="handleFileUpload(event)" />
+                            <button class="import-button" id="openModalBtn">
                                 <i class="fa-solid fa-upload"></i>
                                 import
                             </button>
 
-                          
 
-                                <svg xmlns="http://www.w3.org/2000/svg" width="23.281" height="23.281" viewBox="0 0 23.281 23.281">
-                                    <g id="baseline-keyboard_arrow_right-24px" transform="translate(-0.001)">
-                                      <path id="Path_1415" data-name="Path 1415" d="M15.778,16.273,11.335,11.82l4.443-4.453L14.41,6,8.59,11.82l5.82,5.82Z" transform="translate(-0.829 -0.18)" fill="#262338"/>
-                                      <path id="Path_1416" data-name="Path 1416" d="M23.281,0H0V23.281H23.281Z" transform="translate(0.001)" fill="none"/>
-                                    </g>
-                                  </svg>
-                                  
-                                <svg id="baseline-keyboard_arrow_right-24px" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                    <path id="Path_1415" data-name="Path 1415" d="M8.59,16.59,13.17,12,8.59,7.41,10,6l6,6-6,6Z" transform="translate(0 0)" fill="#2c2e3a"/>
-                                    <path id="Path_1416" data-name="Path 1416" d="M0,0H24V24H0Z" fill="none"/>
-                                  </svg>
+
+                            <svg xmlns="http://www.w3.org/2000/svg" width="23.281" height="23.281"
+                                viewBox="0 0 23.281 23.281">
+                                <g id="baseline-keyboard_arrow_right-24px" transform="translate(-0.001)">
+                                    <path id="Path_1415" data-name="Path 1415"
+                                        d="M15.778,16.273,11.335,11.82l4.443-4.453L14.41,6,8.59,11.82l5.82,5.82Z"
+                                        transform="translate(-0.829 -0.18)" fill="#262338" />
+                                    <path id="Path_1416" data-name="Path 1416" d="M23.281,0H0V23.281H23.281Z"
+                                        transform="translate(0.001)" fill="none" />
+                                </g>
+                            </svg>
+
+                            <svg id="baseline-keyboard_arrow_right-24px" xmlns="http://www.w3.org/2000/svg" width="24"
+                                height="24" viewBox="0 0 24 24">
+                                <path id="Path_1415" data-name="Path 1415"
+                                    d="M8.59,16.59,13.17,12,8.59,7.41,10,6l6,6-6,6Z" transform="translate(0 0)"
+                                    fill="#2c2e3a" />
+                                <path id="Path_1416" data-name="Path 1416" d="M0,0H24V24H0Z" fill="none" />
+                            </svg>
 
 
                         </div>
@@ -213,12 +312,11 @@
 
 
 
-
                 <div class="table-container p-0">
                     <table>
                         <thead>
                             <tr>
-                               
+
                                 <th>Name</th>
                                 <th>Designation</th>
                                 <th>Department</th>
@@ -229,7 +327,7 @@
                             </tr>
                         </thead>
                         <tbody id="employeedata">
-                            
+
                         </tbody>
                     </table>
                 </div>
@@ -248,19 +346,19 @@
 <script>
     // Function to trigger file input click
     function triggerFileUpload() {
-      document.getElementById('fileInput').click();
+        document.getElementById('fileInput').click();
     }
     // Function to handle file upload
     function handleFileUpload(event) {
-      const file = event.target.files[0];
-      if (file) {
-        console.log(`File selected: ${file.name}`);
-        // Perform your file handling logic here
-      } else {
-        console.log("No file selected.");
-      }
+        const file = event.target.files[0];
+        if (file) {
+            console.log(`File selected: ${file.name}`);
+            // Perform your file handling logic here
+        } else {
+            console.log("No file selected.");
+        }
     }
-  </script>
+</script>
 
 
 </body>
