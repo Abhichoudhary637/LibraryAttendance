@@ -24,7 +24,7 @@ ipcRenderer.on('getStudentRes', (event, arg) => {
             imageData = `data:image;base64,${Buffer.from(obj.imagepath).toString('base64')}`;
         }
         studentsdata += '<tr>';
-        studentsdata += ' <td><img src="'+imageData+'"> '+obj?.name+' | '+obj?.student_id+'</td>';
+        studentsdata += ' <td><img src="'+imageData+'"  style="width: 40%; height:20%; border: 1px solid gray; border-radius: 10px;" > '+obj?.name+' | '+obj?.student_id+'</td>';
         studentsdata += '<td>'+obj?.course+'</td>';
         studentsdata += '<td>'+obj?.branch+'</td>';
         studentsdata += '<td>'+obj?.session+'</td>';

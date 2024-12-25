@@ -18,7 +18,7 @@ function createWindow() {
   });
 
   mainWindow.loadFile('src/Login.html');
-  // mainWindow.webContents.openDevTools(); // Optional: Open the DevTools
+  mainWindow.webContents.openDevTools(); // Optional: Open the DevTools
   mainWindow.webContents.reloadIgnoringCache();
 }
 
@@ -26,8 +26,8 @@ function handleDisconnect() {
   connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'Abhi637@#',
-    // password:"shiv#2366",
+    // password: 'Abhi637@#',
+    password:"shiv#2366",
     database: 'library',
     port: 3306
   });
