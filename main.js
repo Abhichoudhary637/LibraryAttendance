@@ -18,7 +18,7 @@ function createWindow() {
   });
 
   mainWindow.loadFile('src/Login.html');
-  mainWindow.webContents.openDevTools(); // Optional: Open the DevTools
+  // mainWindow.webContents.openDevTools(); // Optional: Open the DevTools
   mainWindow.webContents.reloadIgnoringCache();
 }
 
