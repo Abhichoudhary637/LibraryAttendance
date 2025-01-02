@@ -7,29 +7,39 @@ const saveBtn = document.getElementById("saveBtn");
 const fileInput = document.getElementById("fileInput");
 
 // Open modal when the button is clicked
-openModalBtn.onclick = function() {
-  modal.style.display = "block";
+if (openModalBtn){
+  openModalBtn.onclick = function() {
+    modal.style.display = "block";
+  }
 }
 
+
 // Close modal when the close (X) button is clicked
-closeBtn.onclick = function() {
-  modal.style.display = "none";
+if (closeBtn){
+  closeBtn.onclick = function() {
+    modal.style.display = "none";
+  }
 }
 
 // Close modal when the cancel button is clicked
-cancelBtn.onclick = function() {
-  modal.style.display = "none";
+if (cancelBtn){
+  cancelBtn.onclick = function() {
+    modal.style.display = "none";
+  }
 }
 
+
 // Save the file (this is a placeholder for actual file handling)
-saveBtn.onclick = function() {
-  const file = fileInput.files[0];
-  if (file) {
-    alert("File '" + file.name + "' selected.");
-  } else {
-    alert("No file selected.");
+if (saveBtn){
+  saveBtn.onclick = function() {
+    const file = fileInput.files[0];
+    if (file) {
+      alert("File '" + file.name + "' selected.");
+    } else {
+      alert("No file selected.");
+    }
+    modal.style.display = "none";
   }
-  modal.style.display = "none";
 }
 
 // Close modal if the user clicks outside of the modal

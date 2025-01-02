@@ -26,8 +26,8 @@ function handleDisconnect() {
   connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    // password: 'Abhi637@#',
-    password:"shiv#2366",
+    password: 'Abhi637@#',
+    // password:"shiv#2366",
     database: 'library',
     port: 3306
   });
@@ -64,7 +64,7 @@ function closeMysqlConnection() {
 }
 app.on('ready', () => {
   createWindow();
-  handleDisconnect(); // Initialize the MySQL connection
+  // handleDisconnect(); // Initialize the MySQL connection
 });
 
 app.on('window-all-closed', () => {
