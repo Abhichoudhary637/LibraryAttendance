@@ -79,21 +79,6 @@ app.on('activate', () => {
   }
 });
 
-ipcMain.on('request-database', (event, arg) => {
-  if (connection.state === 'disconnected') {
-    event.reply('response-database', { error: 'Database connection is not available' });
-    return;
-  }
-
-  connection.query('SELECT * FROM website_managemenu', (error, results) => {
-    if (error) {
-      console.error('Error executing query:', error);
-      event.reply('response-database', { error });
-    } else {
-      event.reply('response-database', { results });
-    }
-  });
-});
 
 app.on('before-quit', () => {
   closeMysqlConnection();
