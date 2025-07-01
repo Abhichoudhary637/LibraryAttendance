@@ -120,6 +120,7 @@ A desktop-based Library Management System built using Electron.js and MySQL. Thi
     );
 
 5. **Configure MySQL Connection in Code In main.js**
+    ```js
     connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
