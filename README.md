@@ -43,7 +43,7 @@ A desktop-based Library Management System built using Electron.js and MySQL. Thi
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/your-username/library-management-electron.git
+   git clone https://github.com/Abhichoudhary637/LibraryAttendance.git
    cd library-management-electron
 
 2. **Install Node.js dependencies:**
@@ -58,66 +58,66 @@ A desktop-based Library Management System built using Electron.js and MySQL. Thi
 4. **Create the MySQL Database:**
     ```sql
     CREATE TABLE app_users (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  userid VARCHAR(50) NOT NULL,
-  password VARCHAR(100) NOT NULL,
-  name VARCHAR(100),
-  usertype INT, -- 1 = Admin, 0 = Watchman
-  status INT
-);
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    userid VARCHAR(50) NOT NULL,
+    password VARCHAR(100) NOT NULL,
+    name VARCHAR(100),
+    usertype INT, -- 1 = Admin, 0 = Watchman
+    status INT
+    );
 
-CREATE TABLE app_login_info (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  userid VARCHAR(50),
-  logindatetime DATETIME,
-  createdon DATETIME,
-  name VARCHAR(100)
-);
+    CREATE TABLE app_login_info (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    userid VARCHAR(50),
+    logindatetime DATETIME,
+    createdon DATETIME,
+    name VARCHAR(100)
+    );
 
-CREATE TABLE students (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  student_id VARCHAR(50),
-  name VARCHAR(100),
-  course VARCHAR(50),
-  branch VARCHAR(50),
-  session VARCHAR(50),
-  regdate DATE,
-  regexpdate DATE,
-  father VARCHAR(100),
-  mother VARCHAR(100),
-  emailid VARCHAR(100),
-  mobileno VARCHAR(20),
-  address TEXT,
-  imagepath LONGBLOB
-);
+    CREATE TABLE students (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    student_id VARCHAR(50),
+    name VARCHAR(100),
+    course VARCHAR(50),
+    branch VARCHAR(50),
+    session VARCHAR(50),
+    regdate DATE,
+    regexpdate DATE,
+    father VARCHAR(100),
+    mother VARCHAR(100),
+    emailid VARCHAR(100),
+    mobileno VARCHAR(20),
+    address TEXT,
+    imagepath LONGBLOB
+    );
 
-CREATE TABLE employee (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  employee_id VARCHAR(50),
-  name VARCHAR(100),
-  department VARCHAR(50),
-  designation VARCHAR(50),
-  regdate DATE,
-  regexpdate DATE,
-  emailid VARCHAR(100),
-  mobileno VARCHAR(20),
-  address TEXT,
-  imagepath LONGBLOB
-);
+    CREATE TABLE employee (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    employee_id VARCHAR(50),
+    name VARCHAR(100),
+    department VARCHAR(50),
+    designation VARCHAR(50),
+    regdate DATE,
+    regexpdate DATE,
+    emailid VARCHAR(100),
+    mobileno VARCHAR(20),
+    address TEXT,
+    imagepath LONGBLOB
+    );
 
-CREATE TABLE visitor (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  membership_id INT,
-  usertype VARCHAR(50),
-  visit_date DATE
-);
+    CREATE TABLE visitor (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    membership_id INT,
+    usertype VARCHAR(50),
+    visit_date DATE
+    );
 
-CREATE TABLE visitor_log (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  visitor_id INT,
-  entry_time TIME,
-  exit_time TIME
-);
+    CREATE TABLE visitor_log (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    visitor_id INT,
+    entry_time TIME,
+    exit_time TIME
+    );
 
 5. **Configure MySQL Connection in Code In main.js**
     connection = mysql.createConnection({
